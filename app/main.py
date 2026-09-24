@@ -1,11 +1,7 @@
 from fastapi import FastAPI
-app = FastAPI()
-@app.get("/api-endpoint")
-async def first_api():
-        return {'message': 'Hello World!'}
-from fastapi import FastAPI
 
-app = FastAPI()
-@app.get("/api-endpoint")
+app = FastAPI(title="BiletFlow")
+@app.get("/")
 async def first_api():
         return {'message': 'Hello World!'}
+
