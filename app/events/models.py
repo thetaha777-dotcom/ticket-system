@@ -48,4 +48,4 @@ class Event(Base):
     capacity: Mapped[int | None] = mapped_column(Integer, nullable=True)
     visibility: Mapped[EventVisibility] = mapped_column(Enum(EventVisibility), default=EventVisibility.PUBLIC, nullable=False)
     status: Mapped[EventStatus] = mapped_column(Enum(EventStatus), default=EventStatus.DRAFT, nullable=False)
-    seating: Mapped[enum.Enum] = mapped_column(Enum(Seating), nullable=False, default=TicketSeating.GENERAL_ADMISSION)
+    seating: Mapped[enum.Enum] = mapped_column(Enum(Seating), nullable=False, default=Seating.GENERAL_ADMISSION)
