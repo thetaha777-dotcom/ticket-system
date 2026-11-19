@@ -4,5 +4,5 @@ from pydantic import BaseModel, ConfigDict, Field, HttpUrl, PositiveInt
 from typing import Optional
 
 
-class Event(BaseModel):
+class Order(BaseModel):
     id: UUID = Field(default_factory=uuid4)

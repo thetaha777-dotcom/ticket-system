@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from sqlalchemy import String, Boolean, DateTime, Enum, ForeignKey, Text, Float, Integer
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
+from app.orders.models import Order
 
 class TicketStatus(str, enum.Enum):
     VALID = "valid"
@@ -44,8 +45,8 @@ class TicketCategory(Base): #for example adult/child ticket
 class Ticket(Base):
     __tablename__ = "tickets"
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True)
-    ticket_category_id:Mapped[uuid.UUID] = mapped_column(ForeignKey('tickets.id'), nullable=False)
-    order_id:Mapped[uuid.UUID] = mapped_column(ForeignKey('orders.id'), nullable=False)
+    ticket_category_id:Mapped[uuid.UUID] = mapped_column(ForeignKey('ticket_categories.id'), nullable=False)
+    order_id:Mapped[uuid.UUID] = mapped_column(ForeignKey(Order.id), nullable=False)
     seat_section: Mapped[int] = mapped_column(Integer, nullable=True)
     seat_row: Mapped[int] = mapped_column(Integer, nullable=True)
     seat_number: Mapped[int] = mapped_column(Integer, nullable=True)
