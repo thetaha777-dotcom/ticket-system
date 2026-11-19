@@ -1,6 +1,7 @@
-from datetime import datetime
+from uuid import UUID, uuid4
+from AwareDatetime import AwareDatetime
 from enum import Enum
-from pydantic import BaseModel, ConfigDict, Field, PositiveInt
+from pydantic import BaseModel, ConfigDict, Field, HttpUrl, PositiveInt
 from typing import Optional
 
 
@@ -22,17 +23,19 @@ class EventStatus(Enum):
     CANCELLED = "cancelled"
 
 class Event(BaseModel):
+    id: UUID = Field(default_factory=uuid4)
+
     title: str = Field(..., min_length=1, max_length=255)
     description: Optional[str]
     category: str = Field(..., min_length=1, max_length=255)
-    images: list # im not sure if this is right
+    images: list[HttpUrl] = Field(default_factory=list)
     venue: str = Field(..., min_length=1, max_length=255)
     address: str = Field(..., min_length=1, max_length=255)
     city: str = Field(..., min_length=1, max_length=255)
-    start_at: datetime # maybe change all datetimes to AwareDateTime where timezone is necessary
-    end_at: datetime
-    registration_open_at: Optional[datetime]
-    registration_close_at: Optional[datetime]
+    start_at: AwareDatetime
+    end_at: AwareDatetime
+    registration_open_at: Optional[AwareDatetime]
+    registration_close_at: Optional[AwareDatetime]
     capacity: Optional[PositiveInt]
     visibility: EventVisibility
     status: EventStatus
@@ -41,17 +44,19 @@ class EventCreate(Event):
     pass
 
 class EventUpdate(BaseModel): # should they be equal to none here?
+    id: Optional[UUID] = Field(default_factory=uuid4)
+
     title:  Optional[str] = Field(..., min_length=1, max_length=255) 
     description: Optional[str]
     category:  Optional[str] = Field(..., min_length=1, max_length=255)
-    images:  Optional[list] # im not sure if this is right
+    images:  Optional[HttpUrl] = Field(default_factory=list)
     venue:  Optional[str] = Field(..., min_length=1, max_length=255)
     address:  Optional[str] = Field(..., min_length=1, max_length=255)
     city:  Optional[str] = Field(..., min_length=1, max_length=255)
-    start_at:  Optional[datetime] # maybe change all datetimes to AwareDateTime where timezone is necessary
-    end_at:  Optional[datetime]
-    registration_open_at: Optional[datetime]
-    registration_close_at: Optional[datetime]
+    start_at:  Optional[AwareDatetime]
+    end_at:  Optional[AwareDatetime]
+    registration_open_at: Optional[AwareDatetime]
+    registration_close_at: Optional[AwareDatetime]
     capacity: Optional[PositiveInt]
     visibility:  Optional[EventVisibility]
     status:  Optional[EventStatus]
@@ -59,5 +64,4 @@ class EventUpdate(BaseModel): # should they be equal to none here?
 class EventResponse(Event):
     model_config = ConfigDict(from_attributes=True)
     
-    id = int
-    created_at: datetime # need to add EventClass i think
+    created_at: AwareDatetime # need to add EventClass i think
