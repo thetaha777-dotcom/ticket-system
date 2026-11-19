@@ -3,22 +3,22 @@ from decimal import Decimal
 from enum import Enum
 from typing import Optional
 from pydantic import BaseModel, Field, PositiveInt
+from models import TicketType, TicketStatus
 
-
-class TicketTypeCategory(str, Enum):
-    FREE = "free"
-    PAID = "paid"
-
-class TicketStatus(str, Enum):
-    VALID = "valid"
-    CHECKED_IN = "checked_in"
-    CANCELLED = "cancelled"
-    REFUNDED = "refunded"
+# class TicketTypeCategory(str, Enum):
+#     FREE = "free"
+#     PAID = "paid"
+#
+# class TicketStatus(str, Enum):
+#     VALID = "valid"
+#     CHECKED_IN = "checked_in"
+#     CANCELLED = "cancelled"
+#     REFUNDED = "refunded"
 
 class TicketTypeBase(BaseModel):
     name: str = Field(..., min_length=1, max_length=100) # need to reconsider parameters etc
     description: Optional[str]
-    category: TicketTypeCategory
+    category: TicketType
     price: Decimal = Field(..., ge=0.0, decimal_places=2) # temporary numbers
     quantity: PositiveInt = Field(..., ge = 1)
 

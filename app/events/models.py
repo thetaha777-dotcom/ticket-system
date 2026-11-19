@@ -7,6 +7,10 @@ from sqlalchemy import String, Boolean, DateTime, Enum, Text, JSON, Integer
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
+class Seating(str, enum.Enum):
+    GENERAL_ADMISSION = "general_admission"
+    ASSIGNED_SEATING = "assigned_seating"
+
 class EventClass(str, enum.Enum):
     UPCOMING = "upcoming"
     ACTIVE = "active"
@@ -44,3 +48,4 @@ class Event(Base):
     capacity: Mapped[int | None] = mapped_column(Integer, nullable=True)
     visibility: Mapped[EventVisibility] = mapped_column(Enum(EventVisibility), default=EventVisibility.PUBLIC, nullable=False)
     status: Mapped[EventStatus] = mapped_column(Enum(EventStatus), default=EventStatus.DRAFT, nullable=False)
+    seating: Mapped[enum.Enum] = mapped_column(Enum(Seating), nullable=False, default=TicketSeating.GENERAL_ADMISSION)
