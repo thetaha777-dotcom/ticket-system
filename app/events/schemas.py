@@ -3,23 +3,7 @@ from enum import Enum
 from pydantic import BaseModel, Field, HttpUrl, PositiveInt, AwareDatetime
 from typing import Optional
 
-
-class EventClass(str, Enum):
-    UPCOMING = "upcoming"
-    ACTIVE = "active"
-    COMPLETED = "completed"
-    CANCELLED = "cancelled"
-
-class EventVisibility(str, Enum):
-    PUBLIC = "public"
-    UNLISTED = "unlisted"
-    PRIVATE = "private"
-
-class EventStatus(Enum):
-    DRAFT = "draft"
-    PUBLISHED = "published"
-    UNPUBLISHED = "unpublished"
-    CANCELLED = "cancelled"
+from models import Seating, EventClass, EventStatus, EventVisibility
 
 class Event(BaseModel):
     id: UUID = Field(default_factory=uuid4)
@@ -36,7 +20,9 @@ class Event(BaseModel):
     registration_open_at: Optional[AwareDatetime]
     registration_close_at: Optional[AwareDatetime]
     capacity: Optional[PositiveInt]
-    visibility: EventVisibility
-    status: EventStatus
+    visibility: EventVisibility = Field(default_factory=EventVisibility.PUBLIC)
+    status: EventStatus = Field(default_factory=EventStatus.DRAFT)
+    seating: Seating = Field(default_factory=Seating.GENERAL_ADMISSION)
+    event_class: EventClass = Field(default_factory=EventClass.UPCOMING)
     class Config:
             from_attributes = True
