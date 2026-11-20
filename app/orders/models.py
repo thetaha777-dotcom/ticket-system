@@ -19,5 +19,5 @@ class Order(Base):
 
 class OrderTicket(Base):
     __tablename__ = "ordertickets"
-    order_id: Mapped[UUID] = mapped_column(ForeignKey("orders.id"), nullable=False)
-    ticket_id: Mapped[UUID] = mapped_column(ForeignKey("tickets.id"), nullable=False)
+    order_id: Mapped[UUID] = mapped_column(ForeignKey("orders.id"), nullable=False, primary_key=True)
+    ticket_id: Mapped[UUID] = mapped_column(ForeignKey("tickets.id"), nullable=False, primary_key=True)
