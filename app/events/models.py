@@ -3,7 +3,7 @@ import enum
 import uuid
 from datetime import datetime, timezone
 
-from sqlalchemy import String, Boolean, DateTime, Enum, Text, JSON, Integer
+from sqlalchemy import String, Boolean, DateTime, Enum, Text, JSON, Integer, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -28,6 +28,7 @@ class EventVisibility(str, enum.Enum):
     UNLISTED = "unlisted"
     PRIVATE = "private"
 
+
     
 class Event(Base):
     __tablename__ = "events"
@@ -38,9 +39,7 @@ class Event(Base):
     description: Mapped[str] = mapped_column(Text, nullable=True)
     category: Mapped[str] = mapped_column(String(255), nullable=False)
     images: Mapped[list] = mapped_column(JSON, default=list)
-    venue: Mapped[str] = mapped_column(String(255), nullable=False)
-    address: Mapped[str] = mapped_column(String(255), nullable=False)
-    city: Mapped[str] = mapped_column(String(255), nullable=False)
+    venue_id: Mapped[UUID] = mapped_column(ForeignKey("venues.id"), nullable=False)
     start_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     end_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     registration_open_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
@@ -49,3 +48,4 @@ class Event(Base):
     visibility: Mapped[EventVisibility] = mapped_column(Enum(EventVisibility), default=EventVisibility.PUBLIC, nullable=False)
     status: Mapped[EventStatus] = mapped_column(Enum(EventStatus), default=EventStatus.DRAFT, nullable=False)
     seating: Mapped[enum.Enum] = mapped_column(Enum(Seating), nullable=False, default=Seating.GENERAL_ADMISSION)
+    event_class: Mapped[enum.Enum] = mapped_column(Enum(EventClass), nullable=False, default=EventClass.UPCOMING)
