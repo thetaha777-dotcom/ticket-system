@@ -22,6 +22,6 @@ class Venue(Base):
 
 class VenuesEvents(Base):
     __tablename__ = "venues_events"
-    venue_id: Mapped[UUID] = mapped_column(ForeignKey("venues.id"), nullable=False)
-    event_id: Mapped[UUID] = mapped_column(ForeignKey("events.id"), nullable=False)
+    venue_id: Mapped[UUID] = mapped_column(ForeignKey("venues.id"), nullable=False, primary_key=True)
+    event_id: Mapped[UUID] = mapped_column(ForeignKey("events.id"), nullable=False, primary_key=True)
     fill_line: Mapped[str] = mapped_column(String(10000), nullable=False)
