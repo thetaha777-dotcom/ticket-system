@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from jose.exceptions import JWTError, jwt
+from jose.exceptions import JWTError
 from passlib.context import CryptContext
 from .config import settings
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
@@ -7,6 +7,7 @@ from fastapi import HTTPException, status, Depends
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.users.models import User
+from jose import jwt
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 security = HTTPBearer()
