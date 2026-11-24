@@ -1,47 +1,44 @@
-import uuid
+from typing import Literal
 
-from pydantic import BaseModel, EmailStr, field_validator, ConfigDict
+from pydantic import BaseModel, EmailStr, Field
+
+from app.users.schemas import UserOut
+
+# bcrypt reads at most 72 bytes of a password, so longer ones are refused instead of silently cut.
+Password = Field(min_length=8, max_length=72)
+
 
 class RegisterRequest(BaseModel):
-    email: EmailStr 
-    password: str
-    
-    @field_validator
-    @classmethod
-    def password_strength(cls, v: str) -> str:
-        if len(v) < 8:
-            raise ValueError("Password must be at least 8 characters long!")
-        return v
+    name: str = Field(min_length=1, max_length=255)
+    email: EmailStr
+    password: str = Password
+    role: Literal["attendee", "organizer"] = "attendee"
+    locale: str = Field("ru", pattern="^(kk|ru|en)$")
+
 
 class LoginRequest(BaseModel):
     email: EmailStr
     password: str
-    
+
+
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
-    
-class UserOut(BaseModel):
-    model_config = ConfigDict(from_attributes=True)
-    
-    id: uuid.UUID
-    email: EmailStr
-    role:str
-    is_verified: bool
-    
+    user: UserOut
+
+
 class VerifyEmailRequest(BaseModel):
     token: str
+
 
 class ForgotPasswordRequest(BaseModel):
     email: EmailStr
 
+
 class ResetPasswordRequest(BaseModel):
     token: str
-    new_password: str
-    
-    @field_validator("new password")
-    @classmethod
-    def password_strength(cis, v: str) -> str:
-        if len(v) < 8:
-            raise ValueError("Password must be at least 8 characters long!")
-        return v
+    new_password: str = Password
+
+
+class Message(BaseModel):
+    detail: str
