@@ -1,0 +1,57 @@
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: biletflow
+      POSTGRES_PASSWORD: biletflow
+      POSTGRES_DB: biletflow
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U biletflow -d biletflow"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  mail:
+    image: axllent/mailpit:latest
+    ports:
+      - "8025:8025"
+
+  api:
+    build: .
+    environment:
+      ENVIRONMENT: development
+      DATABASE_URL: postgresql+psycopg2://biletflow:biletflow@db:5432/biletflow
+      SECRET_KEY: ${SECRET_KEY:-demo-only-secret-change-me-32-bytes-long}
+      FRONTEND_URL: http://${PUBLIC_HOST:-localhost}:8080
+      API_PUBLIC_URL: http://${PUBLIC_HOST:-localhost}:8000
+      CORS_ORIGINS: http://${PUBLIC_HOST:-localhost}:8080,http://localhost:8080,http://localhost:5173
+      EMAIL_BACKEND: smtp
+      SMTP_HOST: mail
+      SMTP_PORT: "1025"
+      SEED_DEMO_DATA: "true"
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    volumes:
+      - media:/code/media
+
+  web:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: http://${PUBLIC_HOST:-localhost}:8000
+    depends_on:
+      - api
+    ports:
+      - "8080:80"
+
+volumes:
+  pgdata:
+  media:

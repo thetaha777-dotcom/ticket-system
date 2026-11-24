@@ -23,6 +23,12 @@ from app.core.database import Base
 from app.users.models import User
 from app.events.models import Event
 from app.tickets.models import Ticket
+from app.tickets.models import TicketCategory
+from app.orders.models import Order 
+from app.orders.models import OrderTicket
+from app.venues.models import Venue
+from app.venues.models import VenuesEvents
+
 
 target_metadata = Base.metadata
 

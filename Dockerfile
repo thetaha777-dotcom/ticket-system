@@ -1,25 +1,29 @@
-# For more information, please refer to https://aka.ms/vscode-docker-python
-FROM python:3-slim
+# BiletFlow API (FastAPI)
+FROM python:3.13-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+WORKDIR /code
+
+# Install dependencies first: this layer is reused until requirements.txt changes.
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY alembic.ini docker-entrypoint.sh ./
+COPY alembic ./alembic
+COPY app ./app
+
+# Run as an ordinary user, not root. /code/media holds uploaded event images.
+RUN chmod +x docker-entrypoint.sh \
+    && useradd --create-home appuser \
+    && mkdir -p /code/media \
+    && chown -R appuser /code
+USER appuser
 
 EXPOSE 8000
 
-# Keeps Python from generating .pyc files in the container
-ENV PYTHONDONTWRITEBYTECODE=1
-
-# Turns off buffering for easier container logging
-ENV PYTHONUNBUFFERED=1
-
-# Install pip requirements
-COPY requirements.txt .
-RUN python -m pip install -r requirements.txt
-
-WORKDIR /app
-COPY . /app
-
-# Creates a non-root user with an explicit UID and adds permission to access the /app folder
-# For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
-RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
-USER appuser
-
-# During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "-k", "uvicorn.workers.UvicornWorker", "app.main:app"]
+# The entrypoint applies database migrations (and loads demo data when SEED_DEMO_DATA=true),
+# then starts the server given in CMD.
+ENTRYPOINT ["./docker-entrypoint.sh"]
+CMD ["fastapi", "run", "app/main.py", "--port", "8000"]
