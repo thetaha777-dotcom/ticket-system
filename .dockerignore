@@ -1,0 +1,13 @@
+.git
+.env
+.env.*
+**/__pycache__
+.pytest_cache
+.ruff_cache
+venv
+.venv
+media
+tests
+docs
+frontend
+mobile
