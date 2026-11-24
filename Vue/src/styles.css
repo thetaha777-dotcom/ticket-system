@@ -2,28 +2,42 @@
 @import "@fontsource-variable/oswald";
 @import "@fontsource-variable/golos-text";
 
-/* Design tokens. "Sky and sun" come from the colours of the Kazakh flag; ink is the text colour.
-   Both fonts include Kazakh letters (ә ғ қ ң ө ұ ү һ і) and the tenge sign. */
+@font-face {
+  font-family: "Milker";
+  src: url("/Milker.otf") format("opentype");
+  font-display: swap;
+}
+
+/* Both fonts include Kazakh letters (ә ғ қ ң ө ұ ү һ і) and the tenge sign. */
 @theme {
   --font-sans: "Golos Text Variable", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Oswald Variable", "Golos Text Variable", sans-serif;
+  --font-milker: "Milker", "Oswald Variable", "Golos Text Variable", sans-serif;
 
-  --color-ink: #12233d;
-  --color-ink-soft: #5b6b82;
-  --color-sky: #00afca;
-  --color-sky-deep: #00728f;      /* buttons and links: 5.5:1 against white */
-  --color-sky-deeper: #005f78;
-  --color-sky-pale: #d9f1f6;
-  --color-sun: #ffc233;
-  --color-sun-pale: #fff3d1;
-  --color-mist: #eef4f6;
-  --color-line: #d5dee6;
-  --color-ok: #17794d;
-  --color-ok-pale: #dff3e9;
-  --color-warn: #8a5a00;
+  --radius-sm: 0.0625rem;
+  --radius-md: 0.125rem;
+  --radius-lg: 0.125rem;
+  --radius-xl: 0.1875rem;
+  --radius-2xl: 0.25rem;
+  --radius-3xl: 0.375rem;
+  --radius-4xl: 0.5rem;
+
+  --color-ink: #17312e;
+  --color-ink-soft: #4d635f;
+  --color-sky: #20655f;
+  --color-sky-deep: #20655f;
+  --color-sky-deeper: #174c47;
+  --color-sky-pale: #e1eeea;
+  --color-sun: #fac55b;
+  --color-sun-pale: #fff0c8;
+  --color-mist: #fff8b6;
+  --color-line: #e5d38c;
+  --color-ok: #20655f;
+  --color-ok-pale: #dcece5;
+  --color-warn: #775400;
   --color-bad: #b42a25;
   --color-bad-pale: #fbe4e2;
-  --color-chart: #0086a8;         /* validated with the dataviz palette checker */
+  --color-chart: #20655f;
 }
 
 @layer base {
@@ -50,7 +64,7 @@
   :focus-visible {
     outline: 3px solid var(--color-ink);
     outline-offset: 2px;
-    border-radius: 4px;
+    border-radius: 2px;
   }
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; }
@@ -65,7 +79,7 @@
     @apply inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-lg border border-transparent px-4 py-2 text-[0.95rem] font-semibold no-underline transition-colors disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-primary { @apply bg-sky-deep text-white hover:bg-sky-deeper hover:text-white; }
-  .btn-sun { @apply bg-sun text-ink hover:bg-[#f5b414] hover:text-ink; }
+  .btn-sun { @apply bg-sun text-ink hover:bg-[#f8aa27] hover:text-ink; }
   .btn-secondary { @apply border-line bg-white text-ink hover:border-ink hover:text-ink; }
   .btn-ghost { @apply min-h-9 px-2 text-sky-deep hover:bg-sky-pale; }
   .btn-danger { @apply border-bad bg-white text-bad hover:bg-bad-pale hover:text-bad; }
@@ -88,7 +102,7 @@
   .table tr:last-child td { @apply border-b-0; }
   .num { @apply text-right tabular-nums whitespace-nowrap; }
 
-  .badge { @apply inline-flex items-center gap-1 rounded-full bg-mist px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap text-ink; }
+  .badge { @apply inline-flex items-center gap-1 rounded-md bg-mist px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap text-ink; }
   .badge-ok { @apply bg-ok-pale text-ok; }
   .badge-warn { @apply bg-sun-pale text-warn; }
   .badge-bad { @apply bg-bad-pale text-bad; }
@@ -99,7 +113,7 @@
   .notice-bad { @apply border-bad/40 bg-bad-pale text-bad; }
   .notice-ok { @apply border-ok/40 bg-ok-pale text-ok; }
 
-  .tabs { @apply flex gap-1 overflow-x-auto border-b border-line; }
+  .tabs { @apply flex gap-1 overflow-x-auto overflow-y-hidden border-b border-line; }
   .tab { @apply -mb-px border-b-[3px] border-transparent px-3 py-2.5 text-sm font-semibold whitespace-nowrap text-ink-soft no-underline hover:text-ink; }
   .tab-active { @apply border-sun text-ink; }
 }

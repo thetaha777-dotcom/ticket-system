@@ -22,6 +22,7 @@ const routes: RouteRecordRaw[] = [
 
   { path: '/organizer', name: 'organizer', component: () => import('@/views/organizer/DashboardView.vue'), meta: { organizer: true } },
   { path: '/organizer/profile', name: 'organizer-profile', component: () => import('@/views/organizer/ProfileView.vue'), meta: { auth: true } },
+  { path: '/organizer/profile/emotional-support', name: 'organizer-emotional-support', component: () => import('@/views/organizer/EmotionalSupportView.vue'), meta: { auth: true } },
   { path: '/organizer/events/new', name: 'event-new', component: () => import('@/views/organizer/EventFormView.vue'), meta: { organizer: true } },
   { path: '/organizer/events/:id/edit', name: 'event-edit', component: () => import('@/views/organizer/EventFormView.vue'), props: true, meta: { organizer: true } },
   {

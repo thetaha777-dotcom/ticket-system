@@ -1,5 +1,4 @@
 <script setup lang="ts">
-/** Account: name, language, email verification, password and in-app notifications. */
 import { onMounted, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RouterLink } from 'vue-router'

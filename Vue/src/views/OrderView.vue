@@ -1,5 +1,4 @@
 <script setup lang="ts">
-/** One order of the signed-in attendee: status, price, tickets with QR codes, calendar, support. */
 import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RouterLink } from 'vue-router'

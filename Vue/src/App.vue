@@ -22,9 +22,9 @@ function signOut(): void {
 
   <header class="no-print border-b border-line bg-white">
     <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 sm:px-6">
-      <RouterLink :to="{ name: 'home' }" class="flex items-center gap-2 text-ink no-underline hover:text-ink">
-        <img src="/favicon.svg" alt="" class="h-8 w-8" />
-        <span class="font-display text-2xl font-semibold tracking-wide">BiletFlow</span>
+      <RouterLink :to="{ name: 'home' }" class="flex shrink-0 items-center gap-2 text-ink no-underline hover:text-ink">
+        <img src="/favicon.svg" alt="" class="h-8 w-auto shrink-0" />
+        <span class="font-display text-2xl font-semibold tracking-wide text-sky-deep">Flow</span>
       </RouterLink>
 
       <nav :aria-label="$t('nav.main')" class="order-3 flex w-full gap-1 overflow-x-auto text-[0.95rem] font-semibold lg:order-none lg:w-auto lg:flex-1 lg:flex-wrap lg:overflow-visible">
@@ -63,12 +63,6 @@ function signOut(): void {
     <RouterView />
   </main>
 
-  <footer class="no-print mt-12 border-t border-line bg-white">
-    <div class="mx-auto max-w-6xl px-4 py-6 text-sm text-ink-soft sm:px-6">
-      <p class="max-w-[70ch]">{{ $t('footer.demo') }}</p>
-    </div>
-  </footer>
-
   <!-- Toasts: announced to screen readers -->
   <div class="no-print fixed inset-x-0 bottom-4 z-50 flex flex-col items-center gap-2 px-4" role="status" aria-live="polite">
     <div
@@ -89,6 +83,6 @@ function signOut(): void {
 }
 .nav-link.router-link-exact-active,
 .nav-link.router-link-active:not([href="/"]) {
-  @apply bg-mist text-ink;
+  @apply bg-sky-pale text-ink;
 }
 </style>

@@ -4,11 +4,10 @@
     "support": "Support", "organizer": "Organize", "admin": "Admin", "language": "Language", "signIn": "Sign in",
     "signUp": "Create account", "signOut": "Sign out"
   },
-  "footer": { "demo": "BiletFlow is an academic project. Payments, refunds, identity checks and payouts are simulations: no real money moves and no card details are collected." },
   "common": {
     "loading": "Loading…", "save": "Save", "cancel": "Cancel", "close": "Close", "back": "Back", "continue": "Continue",
     "edit": "Edit", "delete": "Delete", "copy": "Copy", "copied": "Copied", "status": "Status", "actions": "Actions",
-    "all": "All", "yes": "Yes", "no": "No", "demoMoney": "Demonstration amounts in KZT, not real transactions."
+    "all": "All", "yes": "Yes", "no": "No", "demoMoney": "Simulated payment"
   },
   "home": {
     "title": "Tickets to events across Kazakhstan", "lead": "Concerts, meetups and student events. Register for free events in a minute and keep every ticket in one place.",
@@ -46,7 +45,7 @@
     "attendeeNames": "Name on each ticket", "attendeeN": "Attendee {n}", "holdHint": "Your tickets are held for a few minutes while you finish the order.",
     "toPayment": "Continue to payment", "registered": "You are registered. Your tickets are ready.", "title": "Checkout",
     "heldFor": "Your tickets are held for you. Time left:", "expired": "The reservation has expired and the tickets were released.",
-    "startAgain": "Choose tickets again", "demoTitle": "Demonstration payment", "demoText": "No real money is charged and no card details are needed. Choose what the payment simulator should answer.",
+    "startAgain": "Choose tickets again", "demoTitle": "Simulated payment",
     "paySuccess": "Pay {amount} (simulate success)", "payFailure": "Simulate a declined payment", "declined": "The simulated payment was declined. No tickets were issued. You can try again.",
     "paid": "Payment received (simulation). Your tickets are ready.", "abandon": "Cancel this order"
   },
@@ -54,7 +53,7 @@
     "myOrders": "My orders", "empty": "You have no orders yet.", "browse": "Browse events", "order": "Order", "event": "Event",
     "ticketCount": "Tickets", "placed": "Placed", "number": "Order {number}", "continuePayment": "Continue to payment",
     "downloadAll": "Download all tickets (PDF)", "tickets": "Tickets", "noTickets": "Tickets appear here after the order is completed.",
-    "summary": "Summary", "demoPayment": "Paid with a simulated payment. No real money was charged.",
+    "summary": "Summary", "demoPayment": "Simulated payment",
     "refundedNote": "This order was refunded: {amount} (simulated refund). Its tickets are no longer valid.",
     "cancelRegistration": "Cancel my registration", "cancelConfirm": "Cancel this registration? The tickets will stop working.",
     "cancelled": "Registration cancelled.", "refundHow": "Need a refund? Ask the organizer through Support.",
@@ -120,6 +119,7 @@
       "draft": "No drafts.", "completed": "Finished events appear here with their orders, check-ins and history.", "cancelled": "No cancelled events."
     },
     "becomeLead": "Create an organizer profile to publish events. Creating events and giving out free tickets is free; paid sales are activated per event.",
+    "emotionalSupport": "Emotional support", "emotionalSupportMessage": "You can do it!", "catPhotoAlt": "Cat photo",
     "contact": "Contact details", "displayName": "Organizer name shown to attendees", "contactEmail": "Contact email", "contactPhone": "Phone",
     "website": "Website", "about": "About the organizer", "createProfile": "Create organizer profile", "profileSaved": "Organizer profile saved.",
     "identity": "Identity verification", "identityText": "Needed before selling paid tickets. In this academic version the check is a simulation and is approved at once.",
@@ -167,7 +167,7 @@
     "viewPage": "Open event page", "preview": "Preview", "edit": "Edit details", "duplicate": "Duplicate",
     "duplicated": "Copy created as a draft. Check the dates.", "cancelEvent": "Cancel event", "publicLink": "Public link",
     "inviteLink": "Invitation link (private event)", "inCheckout": "In checkout now", "inCheckoutHint": "Held for buyers who have not paid yet",
-    "orders": "Completed orders", "money": "Money", "moneyDemo": "Demonstration figures from simulated payments. No real payouts are made.",
+    "orders": "Completed orders", "money": "Money", "moneyDemo": "Simulated payment",
     "fees": "Processing fees", "payout": "Estimated payout",
     "cancelWarning": "Cancelling cannot be undone. Every paid order is refunded, every free registration is cancelled and all attendees are notified.",
     "cancelReason": "Reason", "cancelReasonHint": "Shown to attendees in the cancellation email.", "keepEvent": "Keep the event",
@@ -226,14 +226,14 @@
   },
   "activation": {
     "title": "Paid sales activation", "lead": "Free tickets always work. To sell paid tickets for this event, finish the five steps below. Activation applies to this event only.",
-    "demo": "Academic version: the identity check, the fee payment and payouts are simulations. No real money moves.",
+    "demo": "Simulated payment",
     "active": "Paid sales are active. Attendees can buy paid tickets.", "suspended": "Paid sales were suspended by a platform administrator: {reason}",
     "done": "done", "notDone": "not done yet",
     "step": {
       "paid_ticket_type": { "title": "Create a paid ticket type", "text": "The event needs at least one ticket type with a price." },
       "identity_verified": { "title": "Verify your identity", "text": "Confirms who receives the money. Simulated and approved at once." },
       "payout_account": { "title": "Connect a payout account", "text": "Where revenue would be paid. Demonstration account, no real bank data." },
-      "fee_paid": { "title": "Pay the activation fee", "text": "One-time fee of {amount} for this event, paid with a simulated payment." },
+      "fee_paid": { "title": "Pay the activation fee", "text": "Simulated payment" },
       "terms_accepted": { "title": "Accept the paid-event terms", "text": "You are responsible for the event, its description and its refund policy." }
     },
     "payFee": "Pay {amount} (simulate success)", "feePaid": "Activation fee paid (simulation).",
@@ -274,7 +274,7 @@
     "onlySuspended": "Suspended only", "notSuspended": "Not suspended", "restore": "Restore", "suspendEventTitle": "Suspend event",
     "suspendEventText": "«{title}» will be hidden from search and all further sales will stop. Issued tickets stay valid. The organizer is notified.",
     "reason": "Reason", "eventSuspended": "Event suspended. Sales are stopped.", "eventRestored": "Event restored.",
-    "paymentsDemo": "All payments and refunds here are simulations made for the demonstration. They are not real financial transactions.",
+    "paymentsDemo": "Simulated payment",
     "payments": "Payments", "searchPayments": "Search payments", "searchPaymentsHint": "Reference, order number, name or email", "noPayments": "No payments match.", "noRefunds": "No refunds yet.", "reference": "Reference", "kind": "Kind",
     "paymentKind": { "ticket_purchase": "Ticket purchase", "activation_fee": "Activation fee" }, "amount": "Amount", "when": "When",
     "noActivations": "No event has started paid-sales activation yet.", "fee": "Fee", "checks": "Steps", "feePaid": "fee paid",
@@ -285,7 +285,7 @@
     "supportLead": "Requests from organizers and attendee cases that were escalated to the platform.", "actor": "Who", "action": "Action",
     "setting": {
       "activationFee": "Paid Sales Activation Fee, ₸", "activationFeeHint": "One-time fee per event. Applies to activations started after the change.",
-      "processingFee": "Processing fee, %", "processingFeeHint": "Simulated payment-processing charge, deducted from the organizer's payout.",
+      "processingFee": "Processing fee, %", "processingFeeHint": "Simulated payment",
       "hold": "Checkout hold, minutes", "holdHint": "How long tickets and seats stay reserved while a buyer checks out."
     },
     "settingsSaved": "Settings saved."

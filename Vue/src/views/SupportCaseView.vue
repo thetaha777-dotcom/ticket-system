@@ -1,8 +1,5 @@
 <script setup lang="ts">
-/**
- * One support case as a chat-like thread. It is asynchronous: the page re-reads the case
- * every 8 seconds while it is visible (simple polling, no WebSocket needed).
- */
+
 import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RouterLink } from 'vue-router'

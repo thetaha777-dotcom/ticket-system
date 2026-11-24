@@ -2,6 +2,7 @@
 /** Organizer profile: contact details plus the simulated identity check and payout account. */
 import { onMounted, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { RouterLink } from 'vue-router'
 
 import StatusBadge from '@/components/StatusBadge.vue'
 import { api, ApiError } from '@/lib/api'
@@ -70,7 +71,10 @@ onMounted(async () => {
 
 <template>
   <div class="page">
-    <h1 class="mb-2">{{ $t('org.profile') }}</h1>
+    <div class="mb-2 flex flex-wrap items-center justify-between gap-4">
+      <h1>{{ $t('org.profile') }}</h1>
+      <RouterLink class="btn btn-secondary" :to="{ name: 'organizer-emotional-support' }">{{ $t('org.emotionalSupport') }}</RouterLink>
+    </div>
     <p v-if="loaded && !profile" class="mb-6 max-w-[65ch] text-ink-soft">{{ $t('org.becomeLead') }}</p>
 
     <div class="mt-6 grid gap-6 lg:grid-cols-2">

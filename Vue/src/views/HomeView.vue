@@ -42,7 +42,7 @@ onMounted(async () => {
 <template>
   <section class="border-b border-line bg-white">
     <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
-      <h1 class="max-w-[18ch]">{{ $t('home.title') }}</h1>
+      <h1 class="max-w-[18ch] font-milker">{{ $t('home.title') }}</h1>
       <p class="mt-3 max-w-[60ch] text-lg text-ink-soft">{{ $t('home.lead') }}</p>
 
       <form class="mt-7 grid gap-3 sm:grid-cols-[2fr_1fr_1fr_auto]" role="search" @submit.prevent="load(true)">
@@ -72,7 +72,7 @@ onMounted(async () => {
   <section class="page" aria-live="polite">
     <h2 class="mb-5">{{ $t('home.upcoming') }} <span v-if="total" class="text-ink-soft">{{ total }}</span></h2>
     <p v-if="problem" class="notice notice-bad" role="alert">{{ problem }}</p>
-    <div v-else-if="events.length" class="grid gap-5 lg:grid-cols-2">
+    <div v-else-if="events.length" class="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
       <EventTicketCard v-for="event in events" :key="event.id" :event="event" />
     </div>
     <p v-else-if="!loading" class="card text-ink-soft">{{ $t('home.empty') }}</p>

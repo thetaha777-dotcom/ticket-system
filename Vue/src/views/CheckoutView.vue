@@ -100,7 +100,6 @@ onMounted(load)
 
         <div class="card border-sun">
           <h2 class="card-title">{{ $t('checkout.demoTitle') }}</h2>
-          <p class="mb-4 text-sm">{{ $t('checkout.demoText') }}</p>
           <p v-if="declined" class="notice notice-bad mb-4" role="alert">{{ $t('checkout.declined') }}</p>
           <p v-if="problem" class="notice notice-bad mb-4" role="alert">{{ problem }}</p>
           <div class="flex flex-col gap-2 sm:flex-row">

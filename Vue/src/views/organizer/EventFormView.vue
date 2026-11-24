@@ -124,7 +124,7 @@ onMounted(async () => {
           <ul v-if="form.images.length" class="mb-2 flex flex-wrap gap-3">
             <li v-for="(image, index) in form.images" :key="image" class="relative">
               <img :src="image" alt="" class="h-20 w-32 rounded-lg border border-line object-cover" />
-              <button type="button" class="absolute -top-2 -right-2 h-7 w-7 cursor-pointer rounded-full bg-ink text-white" :aria-label="$t('eventForm.removeImage', { n: index + 1 })" @click="form.images.splice(index, 1)">✕</button>
+              <button type="button" class="absolute -top-2 -right-2 h-7 w-7 cursor-pointer rounded-md bg-ink text-white" :aria-label="$t('eventForm.removeImage', { n: index + 1 })" @click="form.images.splice(index, 1)">✕</button>
             </li>
           </ul>
           <input type="file" accept="image/jpeg,image/png,image/webp" class="block text-sm" :aria-label="$t('eventForm.addImage')" :disabled="uploading || form.images.length >= 8" @change="addImage" />
