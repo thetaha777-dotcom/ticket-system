@@ -28,11 +28,10 @@ class User(Base):
     email: Mapped[str] = mapped_column(String(255), unique=True, index=True, nullable=False)
     hashed_password: Mapped[str] = mapped_column(String(255), nullable=False)
     role: Mapped[UserRole] = mapped_column(enum_type(UserRole), default=UserRole.ATTENDEE, nullable=False)
-    is_verified: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
-    is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
-    locale: Mapped[str] = mapped_column(String(5), default="ru", nullable=False)        #languages!
+    is_verified: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)   # email address confirmed
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)      # False = suspended by a Platform Admin
+    locale: Mapped[str] = mapped_column(String(5), default="ru", nullable=False)        # kk | ru | en
     created_at: Mapped[datetime] = created_at_col()
-
     organizer_profile: Mapped["OrganizerProfile | None"] = relationship(back_populates="user", uselist=False)
 
 
