@@ -7,7 +7,11 @@ from fastapi import HTTPException, status, Depends
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.users.models import User
+<<<<<<< HEAD
 import jwt
+=======
+from jose import jwt
+>>>>>>> a0e45cd3f340f172285544796837dd8f8c8fe147
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 security = HTTPBearer()
