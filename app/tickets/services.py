@@ -76,7 +76,6 @@ def delete_ticket_type(db: Session, event: Event, user: User, category: TicketCa
 
 
 def to_public(category: TicketCategory, event: Event, paid_sales_active: bool) -> TicketTypePublic:
-    """What an attendee sees, including the reason a type cannot be bought right now."""
     now = utcnow()
     reason = None
     if not event.is_on_sale:
