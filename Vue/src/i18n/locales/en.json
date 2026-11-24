@@ -1,0 +1,326 @@
+{
+  "nav": {
+    "skip": "Skip to content", "main": "Main menu", "events": "Events", "tickets": "My tickets", "orders": "My orders",
+    "support": "Support", "organizer": "Organize", "admin": "Admin", "language": "Language", "signIn": "Sign in",
+    "signUp": "Create account", "signOut": "Sign out"
+  },
+  "footer": { "demo": "BiletFlow is an academic project. Payments, refunds, identity checks and payouts are simulations: no real money moves and no card details are collected." },
+  "common": {
+    "loading": "Loading…", "save": "Save", "cancel": "Cancel", "close": "Close", "back": "Back", "continue": "Continue",
+    "edit": "Edit", "delete": "Delete", "copy": "Copy", "copied": "Copied", "status": "Status", "actions": "Actions",
+    "all": "All", "yes": "Yes", "no": "No", "demoMoney": "Demonstration amounts in KZT, not real transactions."
+  },
+  "home": {
+    "title": "Tickets to events across Kazakhstan", "lead": "Concerts, meetups and student events. Register for free events in a minute and keep every ticket in one place.",
+    "search": "Search", "searchHint": "Event or venue", "city": "City", "anyCity": "Any city", "category": "Category",
+    "anyCategory": "Any category", "find": "Find", "upcoming": "Upcoming events", "empty": "No events match these filters. Try another city or category.",
+    "more": "Show more events"
+  },
+  "event": {
+    "free": "Free", "from": "from", "details": "Details", "salesClosed": "Registration is closed", "about": "About the event",
+    "goodToKnow": "Good to know", "organizer": "Organizer", "timezone": "Time zone", "refunds": "Refunds", "tickets": "Tickets",
+    "chooseSeats": "Choose your seats", "chooseSeatsHint": "Select free seats on the map. They are held for you while you check out.",
+    "noSeatsYet": "Select seats on the map to see the price.", "noTickets": "Tickets are not on sale yet.",
+    "fewer": "One fewer: {name}", "more": "One more: {name}", "quantityOf": "Quantity: {name}", "left": "Only {n} left | Only {n} left",
+    "promoCode": "Promo code", "apply": "Apply", "promoApplied": "Code {code} applied: {amount} off", "discount": "Discount ({code})",
+    "total": "Total", "continue": "Continue to checkout", "register": "Register for free", "signInHint": "You will be asked to sign in first.",
+    "youManage": "You manage this event.", "previewNote": "Preview: this event is not published, only you can see this page.",
+    "manage": "Manage", "cancelledNote": "This event has been cancelled. Paid orders were refunded and tickets are no longer valid.",
+    "suspendedNote": "This event is temporarily unavailable.", "report": "Report this event", "reportReason": "What is wrong with this event?",
+    "sendReport": "Send report", "reportSent": "Report sent. The platform team will review the event.", "coverAlt": "Cover image of {title}"
+  },
+  "visibility": { "public": "Public", "unlisted": "Unlisted", "private": "Private" },
+  "refundPolicy": { "none": "No refunds", "before_event": "Refundable until the event starts", "anytime": "Refundable at any time" },
+  "unavailable": {
+    "sold_out": "Sold out", "not_started": "Sales have not started", "ended": "Sales have ended",
+    "paid_sales_inactive": "Paid sales are not active yet", "event_closed": "Registration is closed"
+  },
+  "seat": {
+    "stage": "Stage", "legend": "Seat map legend", "available": "Available", "selected": "Selected", "held": "Held by another buyer",
+    "sold": "Sold", "unavailable": "Not on sale", "accessible": "Accessible seat", "rowN": "row {row}", "seatN": "seat {n}",
+    "limit": "You have reached the maximum number of seats for one order."
+  },
+  "calendar": { "add": "Add to calendar", "file": "Download .ics file" },
+  "checkout": {
+    "yourDetails": "Your details", "buyerName": "Full name", "buyerEmail": "Email for tickets", "buyerPhone": "Phone (optional)",
+    "attendeeNames": "Name on each ticket", "attendeeN": "Attendee {n}", "holdHint": "Your tickets are held for a few minutes while you finish the order.",
+    "toPayment": "Continue to payment", "registered": "You are registered. Your tickets are ready.", "title": "Checkout",
+    "heldFor": "Your tickets are held for you. Time left:", "expired": "The reservation has expired and the tickets were released.",
+    "startAgain": "Choose tickets again", "demoTitle": "Demonstration payment", "demoText": "No real money is charged and no card details are needed. Choose what the payment simulator should answer.",
+    "paySuccess": "Pay {amount} (simulate success)", "payFailure": "Simulate a declined payment", "declined": "The simulated payment was declined. No tickets were issued. You can try again.",
+    "paid": "Payment received (simulation). Your tickets are ready.", "abandon": "Cancel this order"
+  },
+  "order": {
+    "myOrders": "My orders", "empty": "You have no orders yet.", "browse": "Browse events", "order": "Order", "event": "Event",
+    "ticketCount": "Tickets", "placed": "Placed", "number": "Order {number}", "continuePayment": "Continue to payment",
+    "downloadAll": "Download all tickets (PDF)", "tickets": "Tickets", "noTickets": "Tickets appear here after the order is completed.",
+    "summary": "Summary", "demoPayment": "Paid with a simulated payment. No real money was charged.",
+    "refundedNote": "This order was refunded: {amount} (simulated refund). Its tickets are no longer valid.",
+    "cancelRegistration": "Cancel my registration", "cancelConfirm": "Cancel this registration? The tickets will stop working.",
+    "cancelled": "Registration cancelled.", "refundHow": "Need a refund? Ask the organizer through Support.",
+    "refundNotPossible": "The organizer's refund policy does not allow a refund for this order."
+  },
+  "ticket": {
+    "myTickets": "My tickets", "showAll": "Show past and cancelled tickets", "empty": "You have no tickets yet.",
+    "noneUpcoming": "No tickets for upcoming events.", "when": "When", "where": "Where", "attendee": "Attendee", "type": "Ticket type",
+    "seat": "Seat", "code": "Ticket {code}", "qrLabel": "QR code of ticket {code}", "downloadPdf": "Download PDF to print",
+    "notValid": "This ticket is no longer valid."
+  },
+  "support": {
+    "title": "Support", "lead": "Messages with event organizers. Replies arrive here and by email, usually within a day.",
+    "ask": "Ask for help", "askOrganizer": "Write to the organizer", "askPlatform": "Write to platform support", "category": "Topic",
+    "subject": "Subject", "message": "Message", "contextHint": "The event, order and ticket you opened this from are attached automatically.",
+    "send": "Send", "mine": "My requests", "managed": "Requests about my events", "empty": "No support requests here.",
+    "request": "Request", "from": "From", "about": "About", "updated": "Updated", "messages": "{n} message | {n} messages",
+    "escalated": "Escalated to platform", "back": "All requests", "assignee": "Handled by", "assignMe": "Assign to me",
+    "assigned": "The request is assigned to you.", "escalate": "Escalate to platform support", "escalatedDone": "Escalated to platform support.",
+    "statusSaved": "Status updated.", "you": "You", "staffSide": "support", "reply": "Your message",
+    "asyncHint": "This is not a live chat. New replies appear here automatically."
+  },
+  "supportCategory": {
+    "ticket_delivery": "Ticket delivery", "payment": "Payment", "refund": "Refund", "seating": "Seating",
+    "event_information": "Event information", "check_in": "Check-in", "account": "Account", "activation": "Paid sales activation",
+    "technical": "Technical problem"
+  },
+  "auth": {
+    "signIn": "Sign in", "email": "Email", "password": "Password", "forgot": "Forgot your password?", "noAccount": "Create an account",
+    "createAccount": "Create account", "iWant": "I want to", "roleAttendee": "Attend events", "roleAttendeeHint": "Register and buy tickets",
+    "roleOrganizer": "Organize events", "roleOrganizerHint": "Create events and issue tickets", "name": "Full name",
+    "passwordHint": "At least 8 characters.", "haveAccount": "I already have an account",
+    "checkEmail": "Account created. We sent a confirmation link to your email.", "verifyTitle": "Email confirmation",
+    "verified": "Your email address is confirmed.", "forgotTitle": "Reset your password",
+    "forgotLead": "Enter the email of your account and we will send a link to choose a new password.",
+    "sendResetLink": "Send reset link", "resetSent": "If this email is registered, a reset link is on its way.",
+    "resetTitle": "Choose a new password", "setPassword": "Save new password", "resetDone": "Your password was changed."
+  },
+  "account": {
+    "title": "Account", "profile": "Profile", "verified": "Email confirmed", "notVerified": "Email not confirmed yet.",
+    "resend": "Send the link again", "verificationSent": "Confirmation link sent.", "emailLanguage": "Preferred language",
+    "saved": "Profile saved.", "password": "Password", "currentPassword": "Current password", "newPassword": "New password",
+    "changePassword": "Change password", "passwordChanged": "Password changed.", "organizerTitle": "Organizing events",
+    "organizerYes": "You can create events and issue tickets.", "organizerNo": "Create an organizer profile to publish your own events. It is free.",
+    "openOrganizerProfile": "Organizer profile", "becomeOrganizer": "Become an organizer", "notifications": "Notifications",
+    "markRead": "Mark all as read", "noNotifications": "No notifications yet.", "unread": "Unread"
+  },
+  "status": {
+    "draft": "Draft", "published": "Published", "unpublished": "Unpublished", "cancelled": "Cancelled", "upcoming": "Upcoming",
+    "active": "Active", "completed": "Completed", "pending": "Awaiting payment", "refunded": "Refunded", "expired": "Expired",
+    "valid": "Valid", "checked_in": "Checked in", "succeeded": "Succeeded", "failed": "Failed", "open": "Open",
+    "in_progress": "In progress", "waiting_for_customer": "Waiting for customer", "resolved": "Resolved", "verified": "Verified",
+    "not_started": "Not started", "suspended": "Suspended", "reviewed": "Reviewed", "dismissed": "Dismissed"
+  },
+  "role": { "attendee": "Attendee", "organizer": "Organizer", "event_admin": "Event admin", "platform_admin": "Platform admin" },
+  "org": {
+    "title": "My events", "profile": "Organizer profile", "createEvent": "Create event", "eventsTotal": "Events",
+    "upcomingCount": "{n} upcoming | {n} upcoming", "ticketsSold": "Tickets sold", "netRevenue": "Net revenue", "checkedIn": "Checked in",
+    "ofCapacity": "of {n} sold",
+    "group": { "upcoming": "Upcoming", "active": "Active", "draft": "Drafts", "completed": "Completed", "cancelled": "Cancelled" },
+    "empty": {
+      "upcoming": "No upcoming events. Create one: publishing and free tickets cost nothing.", "active": "No event is running right now.",
+      "draft": "No drafts.", "completed": "Finished events appear here with their orders, check-ins and history.", "cancelled": "No cancelled events."
+    },
+    "becomeLead": "Create an organizer profile to publish events. Creating events and giving out free tickets is free; paid sales are activated per event.",
+    "contact": "Contact details", "displayName": "Organizer name shown to attendees", "contactEmail": "Contact email", "contactPhone": "Phone",
+    "website": "Website", "about": "About the organizer", "createProfile": "Create organizer profile", "profileSaved": "Organizer profile saved.",
+    "identity": "Identity verification", "identityText": "Needed before selling paid tickets. In this academic version the check is a simulation and is approved at once.",
+    "identityButton": "Verify identity (simulation)", "identityDone": "Identity verified (simulation).", "payout": "Payout account",
+    "payoutText": "Where ticket revenue would be paid. Demonstration only: enter any value, only the last 4 characters are kept and no money is paid out.",
+    "payoutCurrent": "Connected: {bank}, account ending in {last4}", "bank": "Bank", "holder": "Account holder", "accountNumber": "Account number",
+    "accountHint": "Do not enter a real account number.", "payoutConnect": "Connect payout account", "payoutReplace": "Replace payout account",
+    "payoutDone": "Payout account connected (simulation)."
+  },
+  "eventForm": {
+    "newTitle": "New event", "editTitle": "Edit event", "basics": "Basics", "title": "Event title", "category": "Category",
+    "description": "Description", "images": "Images", "addImage": "Add an image", "removeImage": "Remove image {n}",
+    "imagesHint": "JPEG, PNG or WebP, up to 5 MB. The first image is the cover.", "whenWhere": "When and where", "venue": "Venue",
+    "chooseVenue": "Choose a venue", "hasSeatMap": "seat map", "newVenue": "New venue", "timezone": "Time zone",
+    "timezoneHint": "All dates below are in this time zone.", "start": "Starts", "end": "Ends", "regOpen": "Registration opens",
+    "regOpenHint": "Empty = as soon as the event is published.", "regClose": "Registration closes", "regCloseHint": "Empty = when the event ends.",
+    "rules": "Access and rules", "visibility": "Visibility",
+    "visibilityHint": {
+      "public": "Listed in search for everyone.", "unlisted": "Not listed. Anyone with the link can open it.",
+      "private": "Not listed. Opens only with the invitation link."
+    },
+    "capacity": "Capacity", "capacityHint": "Maximum tickets across all types. Empty = no extra limit.", "seating": "Seating",
+    "general": "General admission", "assigned": "Assigned seats", "seatingHint": "Assigned seats need a venue with a seat map.",
+    "refundPolicy": "Refund policy", "refundText": "Refund details shown to attendees (optional)", "createDraft": "Create draft",
+    "created": "Draft created. Add ticket types next.", "saved": "Event saved.", "venueName": "Venue name", "address": "Address",
+    "useLayout": "Use the predefined seat map", "useLayoutHint": "A concert hall with VIP, Parterre and Balcony sections (152 seats), for assigned seating.",
+    "saveVenue": "Save venue", "venueCreated": "Venue saved."
+  },
+  "manage": {
+    "allEvents": "All my events", "sections": "Event sections", "suspended": "A platform administrator suspended this event: {reason}",
+    "tab": {
+      "overview": "Overview", "tickets": "Ticket types", "seating": "Seat map", "orders": "Orders", "attendees": "Attendees",
+      "promo": "Promo codes", "staff": "Check-in staff", "activation": "Paid sales", "analytics": "Analytics", "history": "History",
+      "support": "Support"
+    },
+    "publication": "Publication",
+    "statusHelp": {
+      "draft": "This event is a draft. Only you can see it. Publish it when the details and ticket types are ready.",
+      "published": "This event is published and attendees can register.",
+      "unpublished": "This event is hidden and registration is paused. Tickets that were already issued stay valid.",
+      "cancelled": "This event is cancelled. Its orders, tickets and history are kept for your records."
+    },
+    "paidInactive": "This event has paid ticket types, but paid sales are not active yet. Finish the checklist:",
+    "publish": "Publish", "published": "Event published.", "unpublish": "Unpublish", "unpublished": "Event unpublished.",
+    "viewPage": "Open event page", "preview": "Preview", "edit": "Edit details", "duplicate": "Duplicate",
+    "duplicated": "Copy created as a draft. Check the dates.", "cancelEvent": "Cancel event", "publicLink": "Public link",
+    "inviteLink": "Invitation link (private event)", "inCheckout": "In checkout now", "inCheckoutHint": "Held for buyers who have not paid yet",
+    "orders": "Completed orders", "money": "Money", "moneyDemo": "Demonstration figures from simulated payments. No real payouts are made.",
+    "fees": "Processing fees", "payout": "Estimated payout",
+    "cancelWarning": "Cancelling cannot be undone. Every paid order is refunded, every free registration is cancelled and all attendees are notified.",
+    "cancelReason": "Reason", "cancelReasonHint": "Shown to attendees in the cancellation email.", "keepEvent": "Keep the event",
+    "cancelledDone": "Event cancelled. Attendees were notified."
+  },
+  "tickets": {
+    "lead": "Each ticket type has its own price, quantity and sales period. Counters update as people check out.",
+    "add": "Add ticket type", "empty": "No ticket types yet. Add at least one before publishing.", "type": "Ticket type",
+    "price": "Price", "quantity": "Quantity", "available": "Available", "reserved": "Reserved", "sold": "Sold", "refunded": "Refunded",
+    "checkedIn": "Checked in", "hidden": "Hidden", "perOrder": "up to {n} per order", "show": "Show", "hide": "Hide",
+    "deleteConfirm": "Delete the ticket type «{name}»?", "editTitle": "Edit ticket type", "name": "Name", "kind": "Kind",
+    "free": "Free", "paid": "Paid", "paidHint": "Paid tickets can be bought only after paid sales are activated for this event.",
+    "priceKzt": "Price, ₸", "limit": "Max per order", "seatedHint": "With assigned seating the quantity equals the number of seats and is set on the Seat map tab.",
+    "saleStart": "Sales start", "saleEnd": "Sales end", "hiddenLabel": "Hide this ticket type from attendees", "saved": "Ticket type saved."
+  },
+  "seating": {
+    "general": "This event uses general admission, so there is no seat map. To sell assigned seats, choose a venue with a seat map and switch seating to assigned seats.",
+    "locked": "Seats have already been reserved or sold, so the seat map can no longer be changed.",
+    "needTypes": "Create ticket types first: each section is sold at the price of one ticket type.", "prices": "Price of each section",
+    "pricesHint": "Choose the ticket type sold in each section, or close the section.", "closed": "Closed, not on sale",
+    "block": "Blocked seats", "blockHint": "Click a seat to take it off sale, for example for equipment or guests. Click again to release it.",
+    "save": "Save seat map", "saved": "Seat map saved.", "live": "What attendees see"
+  },
+  "orders": {
+    "search": "Search orders", "searchHint": "Order number, name or email", "empty": "No orders match.", "buyer": "Buyer",
+    "promo": "promo {code}", "refund": "Refund", "cancel": "Cancel", "policyBlocks": "The refund policy of this event does not allow a refund",
+    "showing": "Showing {shown} of {total}", "refundTitle": "Refund order", "cancelTitle": "Cancel registration",
+    "refundText": "Refund order {number} of {name} in full: {amount}? This is a simulated refund. The tickets become invalid and return to sale.",
+    "cancelText": "Cancel free registration {number} of {name}? The tickets become invalid.", "reason": "Reason (shown to the attendee)",
+    "refundConfirm": "Refund in full", "cancelConfirm": "Cancel registration", "refunded": "Order refunded. The attendee was notified.",
+    "cancelled": "Registration cancelled. The attendee was notified."
+  },
+  "attendees": {
+    "search": "Search attendees", "searchHint": "Name, email or ticket code", "export": "Export CSV", "empty": "No attendees match.",
+    "count": "{n} ticket | {n} tickets", "ticket": "Ticket and order", "checkedInAt": "Checked in at"
+  },
+  "promo": {
+    "lead": "A campaign gives a discount through a promo code and a special Campaign QR code that opens the event with the code applied. A Campaign QR code is not a ticket and never admits anyone.",
+    "create": "Create campaign", "created": "Campaign created.", "empty": "No promo campaigns yet.", "disabled": "Disabled",
+    "perTicket": "{amount} off each ticket", "until": "valid until {date}", "noEnd": "no end date", "allTypes": "all ticket types",
+    "someTypes": "{n} ticket type | {n} ticket types", "qr": "Campaign QR code", "copyLink": "Copy link", "disable": "Disable",
+    "enable": "Enable", "redemptions": "Redemptions", "orders": "Orders", "tickets": "Tickets", "visits": "Link visits", "name": "Campaign name",
+    "discountType": "Discount", "percent": "Percentage", "fixed": "Fixed amount per ticket", "valuePercent": "Percent off",
+    "valueKzt": "Amount off, ₸", "starts": "Valid from", "ends": "Valid until", "max": "Maximum redemptions",
+    "maxHint": "Number of orders. Empty = unlimited.", "code": "Promo code", "codeHint": "Empty = generate one.",
+    "appliesTo": "Applies to", "appliesHint": "Nothing selected = all ticket types.", "qrTitle": "Campaign QR code",
+    "qrAlt": "Campaign QR code for promo code {code}", "qrText": "Print it on posters and flyers. Scanning opens the event page with the discount applied. It is marked as not a ticket and the entrance scanner rejects it.",
+    "download": "Download PNG"
+  },
+  "staff": {
+    "lead": "Event admins sign in to the BiletFlow Check-in mobile app with their own account and see only the events assigned to them.",
+    "empty": "Nobody is assigned yet. You can always check attendees in yourself.", "person": "Person", "undo": "May undo check-ins",
+    "since": "Assigned", "remove": "Remove", "removeConfirm": "Remove {name} from the check-in staff?", "add": "Add an event admin",
+    "emailHint": "The person needs a BiletFlow account with this email.", "canUndo": "May undo an accidental check-in",
+    "assign": "Assign", "added": "Event admin assigned and notified."
+  },
+  "activation": {
+    "title": "Paid sales activation", "lead": "Free tickets always work. To sell paid tickets for this event, finish the five steps below. Activation applies to this event only.",
+    "demo": "Academic version: the identity check, the fee payment and payouts are simulations. No real money moves.",
+    "active": "Paid sales are active. Attendees can buy paid tickets.", "suspended": "Paid sales were suspended by a platform administrator: {reason}",
+    "done": "done", "notDone": "not done yet",
+    "step": {
+      "paid_ticket_type": { "title": "Create a paid ticket type", "text": "The event needs at least one ticket type with a price." },
+      "identity_verified": { "title": "Verify your identity", "text": "Confirms who receives the money. Simulated and approved at once." },
+      "payout_account": { "title": "Connect a payout account", "text": "Where revenue would be paid. Demonstration account, no real bank data." },
+      "fee_paid": { "title": "Pay the activation fee", "text": "One-time fee of {amount} for this event, paid with a simulated payment." },
+      "terms_accepted": { "title": "Accept the paid-event terms", "text": "You are responsible for the event, its description and its refund policy." }
+    },
+    "payFee": "Pay {amount} (simulate success)", "feePaid": "Activation fee paid (simulation).",
+    "termsLabel": "I accept the paid-event terms and confirm that the event is lawful and described truthfully.",
+    "acceptTerms": "Accept terms", "termsDone": "Terms accepted."
+  },
+  "analytics": {
+    "from": "From", "to": "To", "allTypes": "All ticket types", "apply": "Apply", "reset": "Reset", "capacity": "Capacity",
+    "sold": "Sold", "percentSold": "{n}% of capacity sold", "remaining": "Remaining", "attendance": "Checked in",
+    "absent": "{n} not checked in yet, attendance {percent}%", "revenue": "Revenue", "gross": "Gross sales", "discounts": "Discounts",
+    "refunds": "Refunds", "net": "Net revenue", "ticketsPerDay": "Tickets sold per day", "revenuePerDay": "Net revenue per day",
+    "byType": "By ticket type", "campaigns": "Promo campaigns", "showTable": "Show as table", "showChart": "Show as chart",
+    "noSales": "No sales in this period.", "day": "Day", "details": "Details"
+  },
+  "history": {
+    "type": "Activity type", "empty": "No activity matches these filters.", "readonly": "History entries are recorded automatically and cannot be edited or deleted.",
+    "types": {
+      "event": "Event", "ticket_type": "Ticket types", "payment": "Payments", "refund": "Refunds", "order": "Orders", "promo": "Promo codes",
+      "support": "Support", "checkin": "Check-in", "staff": "Staff", "activation": "Paid sales", "user": "Users", "organizer": "Organizers",
+      "settings": "Settings", "report": "Reports"
+    }
+  },
+  "admin": {
+    "title": "Platform administration", "sections": "Administration sections",
+    "tab": {
+      "overview": "Overview", "users": "Users", "events": "Events", "orders": "Orders", "payments": "Payments", "activations": "Paid sales",
+      "reports": "Reports", "support": "Support", "promo": "Promo codes", "audit": "Audit log", "settings": "Settings"
+    },
+    "needsAttention": "Needs attention", "openReports": "Open reports", "openCases": "Open support cases", "paymentFailures": "Payment failures",
+    "suspendedEvents": "Suspended events", "platform": "Platform", "users": "Users", "organizersCount": "{n} organizer | {n} organizers",
+    "publishedEvents": "Published events", "completedOrders": "Completed orders", "ticketsIssued": "{n} ticket issued | {n} tickets issued",
+    "activeActivations": "Events with paid sales", "suspendedActivations": "{n} suspended | {n} suspended", "exports": "Reports",
+    "exportsHint": "Basic operational reports as CSV files.",
+    "export": { "orders": "Orders CSV", "payments": "Payments CSV", "users": "Users CSV", "events": "Events CSV" },
+    "searchUsers": "Search users", "role": "Role", "emailStatus": "Email", "unverified": "Not confirmed", "account": "Account", "joined": "Joined",
+    "suspend": "Suspend", "reactivate": "Reactivate", "suspendUserConfirm": "Suspend the account {email}? The person will be signed out and cannot sign in.",
+    "userSuspended": "Account suspended.", "userReactivated": "Account reactivated.", "searchEvents": "Search events", "show": "Show",
+    "onlySuspended": "Suspended only", "notSuspended": "Not suspended", "restore": "Restore", "suspendEventTitle": "Suspend event",
+    "suspendEventText": "«{title}» will be hidden from search and all further sales will stop. Issued tickets stay valid. The organizer is notified.",
+    "reason": "Reason", "eventSuspended": "Event suspended. Sales are stopped.", "eventRestored": "Event restored.",
+    "paymentsDemo": "All payments and refunds here are simulations made for the demonstration. They are not real financial transactions.",
+    "payments": "Payments", "searchPayments": "Search payments", "searchPaymentsHint": "Reference, order number, name or email", "noPayments": "No payments match.", "noRefunds": "No refunds yet.", "reference": "Reference", "kind": "Kind",
+    "paymentKind": { "ticket_purchase": "Ticket purchase", "activation_fee": "Activation fee" }, "amount": "Amount", "when": "When",
+    "noActivations": "No event has started paid-sales activation yet.", "fee": "Fee", "checks": "Steps", "feePaid": "fee paid",
+    "termsAccepted": "terms accepted", "suspendSales": "Suspend paid sales", "reinstate": "Reinstate",
+    "suspendSalesPrompt": "Why are paid sales of «{title}» suspended? (shown to the organizer)", "salesSuspended": "Paid sales suspended.",
+    "salesReinstated": "Paid sales reinstated.", "noReports": "No reports here.", "eventIsSuspended": "Event is suspended",
+    "markReviewed": "Mark as reviewed", "dismiss": "Dismiss", "goSuspend": "Suspend the event…", "reportSaved": "Report updated.",
+    "supportLead": "Requests from organizers and attendee cases that were escalated to the platform.", "actor": "Who", "action": "Action",
+    "setting": {
+      "activationFee": "Paid Sales Activation Fee, ₸", "activationFeeHint": "One-time fee per event. Applies to activations started after the change.",
+      "processingFee": "Processing fee, %", "processingFeeHint": "Simulated payment-processing charge, deducted from the organizer's payout.",
+      "hold": "Checkout hold, minutes", "holdHint": "How long tickets and seats stay reserved while a buyer checks out."
+    },
+    "settingsSaved": "Settings saved."
+  },
+  "notFound": { "title": "Page not found", "text": "The link may be outdated, or the event may have been unpublished." },
+  "errors": {
+    "unknown": "Something went wrong. Please try again.", "network_error": "The server cannot be reached. Check your connection and try again.",
+    "validation_error": "Some fields are filled in incorrectly. Check the form and try again.", "not_authenticated": "Sign in to continue.",
+    "insufficient_role": "Your account does not have permission for this.", "invalid_credentials": "The email or password is not correct.",
+    "account_suspended": "This account has been suspended.", "email_taken": "An account with this email already exists. Sign in instead.",
+    "invalid_token": "This link is invalid or has expired. Request a new one.", "email_not_verified": "Confirm your email address before publishing an event.",
+    "event_not_found": "This event does not exist or is not published.", "event_private": "This is a private event. Open it with the invitation link from the organizer.",
+    "event_cancelled": "This event has been cancelled.", "event_unavailable": "This event is not available for registration.",
+    "registration_not_open": "Registration has not opened yet.", "registration_closed": "Registration is closed.",
+    "sales_not_started": "Sales of this ticket type have not started yet.", "sales_ended": "Sales of this ticket type have ended.",
+    "paid_sales_inactive": "Paid ticket sales are not active for this event yet.", "sold_out": "Not enough tickets are left.",
+    "event_full": "The event has reached its capacity.", "order_limit_exceeded": "That is more tickets than one order may contain.",
+    "seat_unavailable": "One of the seats has just been taken. Choose another seat.", "no_seats_selected": "Choose at least one seat.",
+    "empty_order": "Choose at least one ticket.", "reservation_expired": "The reservation has expired. Choose your tickets again.",
+    "order_not_pending": "This order is not waiting for payment.", "payment_failed": "The simulated payment was declined.",
+    "promo_not_found": "This promo code does not exist for this event.", "promo_disabled": "This promo code has been disabled.",
+    "promo_not_started": "This promo code is not active yet.", "promo_expired": "This promo code has expired.",
+    "promo_exhausted": "This promo code has been fully used.", "promo_not_applicable": "This promo code does not apply to the selected tickets.",
+    "promo_code_taken": "This promo code is already used for the event.", "use_refund": "A paid order is cancelled by refunding it.",
+    "refund_not_allowed": "The event's refund policy does not allow a refund for this order.", "not_refundable": "Only a completed paid order can be refunded.",
+    "no_ticket_types": "Add at least one visible ticket type before publishing.", "seating_not_configured": "Set up the seat map before publishing.",
+    "event_in_past": "The event dates are in the past. Change them before publishing.", "event_suspended": "This event is suspended by the platform.",
+    "has_sales": "This cannot be changed after tickets have been reserved or sold.", "venue_without_seat_map": "Assigned seats need a venue that has a seat map.",
+    "quantity_below_sold": "The quantity cannot go below the tickets already sold or reserved.", "capacity_below_sold": "The capacity cannot go below the tickets already sold or reserved.",
+    "ticket_type_in_use": "This ticket type already has orders. Hide it instead of deleting it.", "user_not_found": "No BiletFlow account uses this email. Ask the person to register first.",
+    "already_assigned": "This person is already assigned to the event.", "already_organizer": "The organizer can already check attendees in.",
+    "fee_already_paid": "The activation fee is already paid for this event.", "no_organizer_profile": "Create an organizer profile first.",
+    "case_forbidden": "You do not have access to this support request.", "context_required": "Open the request from an event, order or ticket page.",
+    "not_your_order": "This order belongs to another account.", "not_your_ticket": "This ticket belongs to another account.",
+    "not_event_manager": "You do not manage this event.", "invalid_image": "Upload a JPEG, PNG or WebP image.", "file_too_large": "The image is too large.",
+    "cannot_change_self": "You cannot change your own administrator account here."
+  }
+}

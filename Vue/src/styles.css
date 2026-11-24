@@ -1,0 +1,148 @@
+@import "tailwindcss";
+@import "@fontsource-variable/oswald";
+@import "@fontsource-variable/golos-text";
+
+/* Design tokens. "Sky and sun" come from the colours of the Kazakh flag; ink is the text colour.
+   Both fonts include Kazakh letters (ә ғ қ ң ө ұ ү һ і) and the tenge sign. */
+@theme {
+  --font-sans: "Golos Text Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Oswald Variable", "Golos Text Variable", sans-serif;
+
+  --color-ink: #12233d;
+  --color-ink-soft: #5b6b82;
+  --color-sky: #00afca;
+  --color-sky-deep: #00728f;      /* buttons and links: 5.5:1 against white */
+  --color-sky-deeper: #005f78;
+  --color-sky-pale: #d9f1f6;
+  --color-sun: #ffc233;
+  --color-sun-pale: #fff3d1;
+  --color-mist: #eef4f6;
+  --color-line: #d5dee6;
+  --color-ok: #17794d;
+  --color-ok-pale: #dff3e9;
+  --color-warn: #8a5a00;
+  --color-bad: #b42a25;
+  --color-bad-pale: #fbe4e2;
+  --color-chart: #0086a8;         /* validated with the dataviz palette checker */
+}
+
+@layer base {
+  html {
+    color: var(--color-ink);
+    background: var(--color-mist);
+    font-family: var(--font-sans);
+  }
+  body {
+    min-height: 100vh;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: 0.005em;
+  }
+  h1 { font-size: clamp(2rem, 4.2vw, 3.25rem); }
+  h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); }
+  h3 { font-size: 1.25rem; }
+  a { color: var(--color-sky-deep); text-underline-offset: 3px; }
+  a:hover { color: var(--color-sky-deeper); }
+  /* One clear focus ring everywhere (keyboard users). */
+  :focus-visible {
+    outline: 3px solid var(--color-ink);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+}
+
+@layer components {
+  .page { @apply mx-auto w-full max-w-6xl px-4 py-8 sm:px-6; }
+  .page-narrow { @apply mx-auto w-full max-w-xl px-4 py-10 sm:px-6; }
+
+  .btn {
+    @apply inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-lg border border-transparent px-4 py-2 text-[0.95rem] font-semibold no-underline transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary { @apply bg-sky-deep text-white hover:bg-sky-deeper hover:text-white; }
+  .btn-sun { @apply bg-sun text-ink hover:bg-[#f5b414] hover:text-ink; }
+  .btn-secondary { @apply border-line bg-white text-ink hover:border-ink hover:text-ink; }
+  .btn-ghost { @apply min-h-9 px-2 text-sky-deep hover:bg-sky-pale; }
+  .btn-danger { @apply border-bad bg-white text-bad hover:bg-bad-pale hover:text-bad; }
+  .btn-sm { @apply min-h-9 px-3 py-1 text-sm; }
+
+  .label { @apply mb-1 block text-sm font-semibold text-ink; }
+  .hint { @apply mt-1 text-sm text-ink-soft; }
+  .input {
+    @apply block min-h-11 w-full rounded-lg border border-line bg-white px-3 py-2 text-ink placeholder:text-ink-soft/70 focus:border-sky-deep;
+  }
+  textarea.input { @apply min-h-24; }
+
+  .card { @apply rounded-xl border border-line bg-white p-5; }
+  .card-title { @apply mb-3 font-sans text-base font-semibold; }
+
+  .table-wrap { @apply overflow-x-auto rounded-xl border border-line bg-white; }
+  .table { @apply w-full border-collapse text-left text-sm; }
+  .table th { @apply border-b border-line bg-mist/60 px-3 py-2.5 font-semibold whitespace-nowrap text-ink-soft; }
+  .table td { @apply border-b border-line/70 px-3 py-2.5 align-top; }
+  .table tr:last-child td { @apply border-b-0; }
+  .num { @apply text-right tabular-nums whitespace-nowrap; }
+
+  .badge { @apply inline-flex items-center gap-1 rounded-full bg-mist px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap text-ink; }
+  .badge-ok { @apply bg-ok-pale text-ok; }
+  .badge-warn { @apply bg-sun-pale text-warn; }
+  .badge-bad { @apply bg-bad-pale text-bad; }
+  .badge-sky { @apply bg-sky-pale text-sky-deeper; }
+
+  .notice { @apply rounded-lg border border-line bg-white px-4 py-3 text-sm; }
+  .notice-warn { @apply border-sun bg-sun-pale text-ink; }
+  .notice-bad { @apply border-bad/40 bg-bad-pale text-bad; }
+  .notice-ok { @apply border-ok/40 bg-ok-pale text-ok; }
+
+  .tabs { @apply flex gap-1 overflow-x-auto border-b border-line; }
+  .tab { @apply -mb-px border-b-[3px] border-transparent px-3 py-2.5 text-sm font-semibold whitespace-nowrap text-ink-soft no-underline hover:text-ink; }
+  .tab-active { @apply border-sun text-ink; }
+}
+
+/* ---- The ticket shape -----------------------------------------------------------------
+   Event cards and tickets are cut like a real ticket: two round notches and a perforated
+   tear line between the main part and the stub. `--perf` is where the tear line sits. */
+.ticket-wrap {
+  filter: drop-shadow(0 1px 1px rgb(18 35 61 / 0.16)) drop-shadow(0 6px 14px rgb(18 35 61 / 0.07));
+}
+.ticket {
+  --perf: 74%;
+  --notch: 11px;
+  background: #fff;
+  border-radius: 12px;
+  -webkit-mask:
+    radial-gradient(circle var(--notch) at var(--perf) 0, #0000 97%, #000) top / 100% 51% no-repeat,
+    radial-gradient(circle var(--notch) at var(--perf) 100%, #0000 97%, #000) bottom / 100% 51% no-repeat;
+  mask:
+    radial-gradient(circle var(--notch) at var(--perf) 0, #0000 97%, #000) top / 100% 51% no-repeat,
+    radial-gradient(circle var(--notch) at var(--perf) 100%, #0000 97%, #000) bottom / 100% 51% no-repeat;
+}
+@media (max-width: 639px) {
+  .ticket { --perf: 71%; --notch: 9px; }
+}
+.ticket-main { width: var(--perf); min-width: 0; }
+.ticket-stub {
+  width: calc(100% - var(--perf));
+  border-left: 2px dashed var(--color-line);
+}
+
+/* Seat map statuses use a symbol as well as a colour (see SeatMap.vue). */
+.seat {
+  @apply inline-flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-md border-2 border-sky-deep bg-white text-[0.7rem] font-semibold text-ink tabular-nums;
+}
+.seat:hover:not(:disabled) { @apply bg-sky-pale; }
+.seat-selected { @apply border-ink bg-ink text-sun; }
+.seat-selected:hover:not(:disabled) { @apply bg-ink; }
+.seat-held { @apply cursor-not-allowed border-line text-ink-soft; background: repeating-linear-gradient(45deg, #fff 0 4px, var(--color-line) 4px 6px); }
+.seat-sold { @apply cursor-not-allowed border-line bg-line text-ink-soft; }
+.seat-unavailable { @apply cursor-not-allowed border-dashed border-line bg-transparent text-ink-soft/70; }
+
+@media print {
+  .no-print { display: none !important; }
+  html { background: #fff; }
+}
