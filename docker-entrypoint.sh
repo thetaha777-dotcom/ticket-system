@@ -1,3 +1,5 @@
+#!/bin/sh
+# Runs inside the API container before the server starts.
 set -e
 
 echo "Applying database migrations..."

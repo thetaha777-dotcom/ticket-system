@@ -1,17 +1,25 @@
 [project]
 name = "biletflow"
-version = "0.1.0"
-description = "Ticket management system"
-authors = [
-    {name = "Your Name",email = "you@example.com"}
-]
+version = "1.0.0"
+description = "BiletFlow: self-service event ticketing platform for Kazakhstan (academic MVP) - FastAPI backend"
 license = "MIT"
-requires-python = ">=3.13"
-dependencies = [
-    "requests (>=2.34.2,<3.0.0)"
+readme = "README.md"
+requires-python = ">=3.12"
+# Dependencies are installed from requirements.txt (see README.md).
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 130
+target-version = "py312"
+exclude = ["alembic/versions"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+ignore = [
+    "B008",   # FastAPI's Depends(...) in function defaults is the intended style
+    "E501",   # line length is handled by the formatter setting above
+    "F821",   # forward references to models in other modules ("Event", "User", ...)
 ]
-
-
-[build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"

@@ -1,3 +1,19 @@
+# BiletFlow - local / demonstration deployment.
+#
+#   docker compose up --build
+#
+#   Web app   http://localhost:8080
+#   API docs  http://localhost:8000/docs
+#   Mailbox   http://localhost:8025      (every email the platform "sends" lands here)
+#
+# Demo accounts are listed in README.md (password: Demo12345).
+#
+# To use it from a phone on the same Wi-Fi (check-in app, scanning a Campaign QR code), tell it
+# the address of this computer in the network and rebuild:
+#
+#   PUBLIC_HOST=192.168.1.20 docker compose up --build
+#
+# Links in emails, QR codes and the web app then point to http://192.168.1.20:... instead of localhost.
 
 services:
   db:
@@ -16,6 +32,7 @@ services:
       timeout: 3s
       retries: 20
 
+  # Mailpit catches all outgoing email and shows it in a web inbox. Nothing leaves your computer.
   mail:
     image: axllent/mailpit:latest
     ports:
@@ -26,6 +43,7 @@ services:
     environment:
       ENVIRONMENT: development
       DATABASE_URL: postgresql+psycopg2://biletflow:biletflow@db:5432/biletflow
+      # Change this for anything that is reachable from the internet:
       SECRET_KEY: ${SECRET_KEY:-demo-only-secret-change-me-32-bytes-long}
       FRONTEND_URL: http://${PUBLIC_HOST:-localhost}:8080
       API_PUBLIC_URL: http://${PUBLIC_HOST:-localhost}:8000
@@ -46,6 +64,7 @@ services:
     build:
       context: ./frontend
       args:
+        # The address of the API as seen from the visitor's browser. It is compiled into the web app.
         VITE_API_URL: http://${PUBLIC_HOST:-localhost}:8000
     depends_on:
       - api
