@@ -10,8 +10,8 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 class Settings(BaseSettings):
     DATABASE_URL: str
     SECRET_KEY: str
-    algorithm: str = "HS256"
-    access_token_expire_mins: int = 60 * 24
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24
     email_verification_expire_mins: int = 60 * 24
     password_reset_expire_mins: int = 30
     

@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from jose.exceptions import JWTError, jwt
+from jose.exceptions import JWTError
 from passlib.context import CryptContext
 from .config import settings
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
@@ -7,6 +7,7 @@ from fastapi import HTTPException, status, Depends
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.users.models import User
+import jwt
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 security = HTTPBearer()
@@ -20,9 +21,9 @@ def get_password_hash(password: str) -> str:
 def create_access_token(data: dict, expires_delta: timedelta = None) -> str:
     to_encode = data.copy()
     if expires_delta:
-        expire = datetime.utcnow() + expires_delta
+        expire = datetime + expires_delta
     else:
-        expire = datetime.utcnow() + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+        expire = datetime + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
     return encoded_jwt
@@ -30,7 +31,7 @@ def create_access_token(data: dict, expires_delta: timedelta = None) -> str:
 def create_refresh_token(data: dict) -> str:
     """Создание refresh токена"""
     to_encode = data.copy()
-    expire = datetime.utcnow() + timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS)
+    expire = datetime + timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
     return encoded_jwt
