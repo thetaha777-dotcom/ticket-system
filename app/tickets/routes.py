@@ -49,3 +49,30 @@ def ticket_pdf(ticket_id: uuid.UUID, user: User = Depends(get_current_user), db:
         content=render_tickets_pdf([ticket]), media_type="application/pdf",
         headers={"Content-Disposition": f'attachment; filename="ticket-{ticket.code}.pdf"'},
     )
+
+
+organizer_router = APIRouter(prefix="/organizer/events/{event_id}/ticket-types", tags=["organizer: ticket types"])
+
+
+@organizer_router.get("", response_model=list[TicketTypeOut])
+def list_ticket_types(event: Event = Depends(managed_event)):
+    return event.ticket_categories
+
+
+@organizer_router.post("", response_model=TicketTypeOut, status_code=status.HTTP_201_CREATED)
+def create_ticket_type(data: TicketTypeIn, event: Event = Depends(managed_event),
+                       user: User = Depends(require_organizer), db: Session = Depends(get_db)):
+    return services.create_ticket_type(db, event, user, data)
+
+
+@organizer_router.patch("/{ticket_type_id}", response_model=TicketTypeOut)
+def update_ticket_type(ticket_type_id: uuid.UUID, data: TicketTypeUpdate, event: Event = Depends(managed_event),
+                       user: User = Depends(require_organizer), db: Session = Depends(get_db)):
+    category = services.get_category(db, event, ticket_type_id)
+    return services.update_ticket_type(db, event, user, category, data)
+
+
+@organizer_router.delete("/{ticket_type_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_ticket_type(ticket_type_id: uuid.UUID, event: Event = Depends(managed_event),
+                       user: User = Depends(require_organizer), db: Session = Depends(get_db)):
+    services.delete_ticket_type(db, event, user, services.get_category(db, event, ticket_type_id))
