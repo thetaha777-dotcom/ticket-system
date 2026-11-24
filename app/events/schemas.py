@@ -1,9 +1,11 @@
 import uuid
 from datetime import datetime
+from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
 from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator, model_validator
 
+from app.core.config import settings
 from app.events.models import EventClass, EventStatus, EventVisibility, RefundPolicy, Seating, SeatStatus
 from app.tickets.schemas import TicketTypeOut, TicketTypePublic
 from app.users.schemas import UserBrief
@@ -16,6 +18,18 @@ def _check_timezone(value: str | None) -> str | None:
             ZoneInfo(value)
         except Exception as exc:
             raise ValueError("Unknown time zone, use an IANA name such as Asia/Almaty") from exc
+    return value
+
+
+def _public_media_url(value: str) -> str:
+    parsed = urlsplit(value)
+    if parsed.path.startswith("/media/") and parsed.hostname in (None, "localhost", "127.0.0.1", "::1"):
+        url = f"{settings.api_public_url.rstrip('/')}{parsed.path}"
+        if parsed.query:
+            url += f"?{parsed.query}"
+        if parsed.fragment:
+            url += f"#{parsed.fragment}"
+        return url
     return value
 
 
@@ -69,6 +83,13 @@ class EventUpdate(BaseModel):
 
 class EventCard(BaseModel):
     model_config = ConfigDict(from_attributes=True)
+
+    @field_validator("images", mode="before")
+    @classmethod
+    def resolve_local_media_urls(cls, value: object) -> object:
+        if isinstance(value, list):
+            return [_public_media_url(image) if isinstance(image, str) else image for image in value]
+        return value
 
     id: uuid.UUID
     slug: str
