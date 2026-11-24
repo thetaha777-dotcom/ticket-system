@@ -1,88 +1,71 @@
-from datetime import datetime, timedelta
-from jose.exceptions import JWTError
-from passlib.context import CryptContext
-from .config import settings
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from fastapi import HTTPException, status, Depends
-from sqlalchemy.orm import Session
-from app.core.database import get_db
-from app.users.models import User
-<<<<<<< HEAD
+import base64
+import hashlib
+import hmac
+import uuid
+from datetime import timedelta
+
+import bcrypt
 import jwt
-=======
-from jose import jwt
->>>>>>> a0e45cd3f340f172285544796837dd8f8c8fe147
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-security = HTTPBearer()
+from app.core.config import settings
+from app.core.database import utcnow
 
-def verify_password(plain_password: str, hashed_password: str) -> bool:
-    return pwd_context.verify(plain_password, hashed_password)
+
+_BCRYPT_ROUNDS = 4 if settings.environment == "test" else 12
+
 
 def get_password_hash(password: str) -> str:
-    return pwd_context.hash(password)
+    return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt(rounds=_BCRYPT_ROUNDS)).decode("utf-8")
 
-def create_access_token(data: dict, expires_delta: timedelta = None) -> str:
-    to_encode = data.copy()
-    if expires_delta:
-        expire = datetime + expires_delta
-    else:
-        expire = datetime + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
-    return encoded_jwt
 
-def create_refresh_token(data: dict) -> str:
-    """Создание refresh токена"""
-    to_encode = data.copy()
-    expire = datetime + timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS)
-    to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
-    return encoded_jwt
-
-def decode_token(token: str) -> dict:
-    """Декодирование токена"""
+def verify_password(plain_password: str, hashed_password: str) -> bool:
     try:
-        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
-        return payload
-    except JWTError:
+        return bcrypt.checkpw(plain_password.encode("utf-8"), hashed_password.encode("utf-8"))
+    except ValueError:
+        return False
+
+def create_token(subject: str, purpose: str, expires_mins: int, extra: dict | None = None) -> str:
+    payload = {"sub": subject, "purpose": purpose, "exp": utcnow() + timedelta(minutes=expires_mins)}
+    if extra:
+        payload.update(extra)
+    return jwt.encode(payload, settings.SECRET_KEY, algorithm=settings.algorithm)
+
+
+def decode_token(token: str, purpose: str) -> dict | None:
+    try:
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.algorithm])
+    except jwt.PyJWTError:
         return None
+    if payload.get("purpose") != purpose:
+        return None
+    return payload
 
 
-async def get_current_user(
-        credentials: HTTPAuthorizationCredentials = Depends(security),
-        db: Session = Depends(get_db)
-) -> User:
-    """Get current user from JWT token"""
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
+def password_fingerprint(hashed_password: str) -> str:
+    return hashlib.sha256(hashed_password.encode()).hexdigest()[:16]
 
+
+TICKET_QR_PREFIX = "BFT1"
+
+
+def _ticket_signature(ticket_id: uuid.UUID) -> str:
+    digest = hmac.new(settings.SECRET_KEY.encode(), f"ticket:{ticket_id.hex}".encode(), hashlib.sha256).digest()
+    return base64.b32encode(digest[:15]).decode()  # 24 chars, A-Z and 2-7
+
+
+def ticket_qr_payload(ticket_id: uuid.UUID) -> str:
+    return f"{TICKET_QR_PREFIX}.{ticket_id.hex.upper()}.{_ticket_signature(ticket_id)}"
+
+
+def parse_ticket_qr(payload: str) -> uuid.UUID | None:
+    """Return the ticket id when the payload is a genuine BiletFlow admission QR, else None."""
+    parts = payload.strip().split(".")
+    if len(parts) != 3 or parts[0] != TICKET_QR_PREFIX:
+        return None
     try:
-        token = credentials.credentials
-        print(f"[AUTH DEBUG] Validating token: {token[:20]}...")
-
-        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
-        user_id: str = payload.get("sub")
-        print(f"[AUTH DEBUG] Token payload - user_id: {user_id}")
-
-        if user_id is None:
-            print("[AUTH DEBUG] No user_id in token")
-            raise credentials_exception
-
-        user = db.query(User).filter(User.id == int(user_id)).first()
-        if user is None:
-            print("[AUTH DEBUG] User not found in database")
-            raise credentials_exception
-
-        print(f"[AUTH DEBUG] User authenticated: {user.id}, {user.email}, Role: {user.role}")
-        return user
-
-    except JWTError as e:
-        print(f"[AUTH DEBUG] JWT Error: {e}")
-        raise credentials_exception
-    except Exception as e:
-        print(f"[AUTH DEBUG] Unexpected error: {e}")
-        raise credentials_exception
+        ticket_id = uuid.UUID(hex=parts[1])
+    except ValueError:
+        return None
+    if not hmac.compare_digest(parts[2], _ticket_signature(ticket_id)):
+        return None
+    return ticket_id
