@@ -1,10 +1,3 @@
-"""Write docs/DATABASE_TABLES.md - every table and column - from the SQLAlchemy models.
-
-    python -m scripts.export_schema
-
-The file is generated: do not edit it by hand. Re-run this script after you change a model
-(and after you created the Alembic migration for that change). It needs no database.
-"""
 
 import os
 from pathlib import Path
@@ -14,8 +7,8 @@ os.environ.setdefault("SECRET_KEY", "not-used-when-exporting-the-schema")
 
 from sqlalchemy.dialects import postgresql  # noqa: E402
 
-from app import models  # noqa: E402, F401  (importing registers every table)
-from app.core.database import Base  # noqa: E402
+from app import models 
+from app.core.database import Base  
 
 TARGET = Path(__file__).resolve().parent.parent / "docs" / "DATABASE_TABLES.md"
 
