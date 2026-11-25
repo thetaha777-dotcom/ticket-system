@@ -1,30 +1,15 @@
-"""Write the API description files in docs/ from the running code.
-
-    python -m scripts.export_openapi
-
-Produces:
-  docs/openapi.json       the machine-readable OpenAPI 3.1 document (import it into Postman, Insomnia...)
-  docs/API_REFERENCE.md   one table per area listing every endpoint
-
-Both files are generated: do not edit them by hand. Re-run this script after you add or change a route.
-It needs no database - it only reads the route definitions.
-"""
-
 import json
 import os
 from pathlib import Path
 
-# The settings object needs these two values to exist; nothing connects to the database here.
 os.environ.setdefault("DATABASE_URL", "sqlite://")
 os.environ.setdefault("SECRET_KEY", "not-used-when-exporting-the-openapi-document")
 
-from app.main import app  # noqa: E402  (must come after the environment defaults)
+from app.main import app 
 
 DOCS = Path(__file__).resolve().parent.parent / "docs"
 
-# Routes that work with or without a login token (the token only widens what you may see).
 OPTIONAL_LOGIN = ("/api/v1/events/{ref}",)
-
 
 def access_label(path: str, operation: dict) -> str:
     if not operation.get("security"):
