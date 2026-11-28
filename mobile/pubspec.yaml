@@ -1,5 +1,5 @@
 name: biletflow_checkin
-description: "BiletFlow Check-in: ticket verification app for Event Admins"
+description: "BiletFlow: buy event tickets and keep them on your phone; check tickets at the entrance (staff)"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -41,6 +41,8 @@ dependencies:
   intl: ^0.20.3
   flutter_localizations:
     sdk: flutter
+  qr_flutter: ^4.1.0
+  flutter_svg: ^2.5.1
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +65,10 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  # The BiletFlow ticket logo (the launcher icons are made from it by tool/make_icons.sh).
+  assets:
+    - assets/logo.svg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
