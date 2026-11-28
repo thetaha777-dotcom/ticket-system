@@ -3,12 +3,9 @@ import 'package:material_ui/material_ui.dart';
 
 import '../theme.dart';
 
-/// The BiletFlow wordmark: the ticket logo (which says "Bilet") followed by "Flow", as on the website.
-/// Screen readers hear one word, "BiletFlow".
 class BrandLogo extends StatelessWidget {
   const BrandLogo({super.key, this.height = 34});
 
-  /// Height of the ticket; the text is sized to match.
   final double height;
 
   @override
