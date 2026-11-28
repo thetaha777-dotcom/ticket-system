@@ -1,5 +1,3 @@
-/// Data classes for the JSON returned by the BiletFlow check-in API
-/// (see app/checkin/schemas.py in the backend).
 library;
 
 class AppUser {
@@ -10,6 +8,8 @@ class AppUser {
   final String email;
   final String role;
 
+  bool get worksAtEvents => role == 'event_admin' || role == 'organizer' || role == 'platform_admin';
+
   factory AppUser.fromJson(Map<String, dynamic> json) => AppUser(
     id: json['id'] as String,
     name: json['name'] as String,
@@ -18,7 +18,6 @@ class AppUser {
   );
 }
 
-/// Counters shared by every device at the entrance.
 class CheckInStats {
   const CheckInStats({required this.registered, required this.checkedIn, required this.remaining});
 
@@ -26,7 +25,6 @@ class CheckInStats {
   final int checkedIn;
   final int remaining;
 
-  /// Share of registered attendees who are already inside, from 0 to 1.
   double get progress => registered == 0 ? 0 : checkedIn / registered;
 
   factory CheckInStats.fromJson(Map<String, dynamic> json) => CheckInStats(
@@ -36,7 +34,6 @@ class CheckInStats {
   );
 }
 
-/// An event the signed-in Event Admin is assigned to.
 class StaffEvent {
   const StaffEvent({
     required this.id,
@@ -60,7 +57,6 @@ class StaffEvent {
   final String venueName;
   final String venueCity;
 
-  /// Whether this person may reverse an accidental check-in.
   final bool canUndo;
   final CheckInStats stats;
 
@@ -77,7 +73,6 @@ class StaffEvent {
   );
 }
 
-/// What the scanner or the manual search shows about one ticket.
 class TicketInfo {
   const TicketInfo({
     required this.id,
@@ -116,7 +111,6 @@ class TicketInfo {
   );
 }
 
-/// Every answer the verification endpoint can give.
 enum ScanOutcome {
   valid('valid'),
   alreadyUsed('already_used'),
@@ -125,13 +119,11 @@ enum ScanOutcome {
   invalid('invalid'),
   wrongEvent('wrong_event'),
 
-  /// A promotional Campaign QR code was scanned. It is never an admission ticket.
   campaignQr('campaign_qr');
 
   const ScanOutcome(this.apiValue);
   final String apiValue;
 
-  /// Unknown values are treated as invalid: when in doubt, do not admit.
   static ScanOutcome parse(String value) =>
       ScanOutcome.values.firstWhere((outcome) => outcome.apiValue == value, orElse: () => ScanOutcome.invalid);
 
@@ -143,7 +135,6 @@ class ScanResult {
 
   final ScanOutcome outcome;
 
-  /// English text from the server; the app shows its own translated text for each outcome.
   final String message;
   final TicketInfo? ticket;
   final CheckInStats stats;
@@ -156,7 +147,6 @@ class ScanResult {
   );
 }
 
-/// One line of the activity feed: a check-in or a reversal made on any device.
 class ActivityRecord {
   const ActivityRecord({
     required this.id,
@@ -170,10 +160,8 @@ class ActivityRecord {
 
   final String id;
 
-  /// check_in | undo
   final String action;
 
-  /// scan | manual
   final String method;
   final DateTime createdAt;
   final String staffName;

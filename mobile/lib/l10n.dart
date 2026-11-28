@@ -1,19 +1,17 @@
-/// Texts of the app in Kazakh, Russian and English.
-///
-/// Use them in a widget with `context.t('key')`. To add a text, add the same key to all
-/// three maps (test/l10n_test.dart fails when one language is missing a key).
 library;
 
 import 'package:material_ui/material_ui.dart';
 
 import 'api.dart';
+import 'l10n_attendee.dart';
 import 'session.dart';
 
 const Map<String, Map<String, String>> translations = {
   'en': {
-    'appTitle': 'BiletFlow Check-in',
-    'signInTitle': 'Sign in to check tickets',
-    'signInLead': 'Use the BiletFlow account the organizer assigned to the event.',
+    ...attendeeTextsEn,
+    'appTitle': 'BiletFlow',
+    'signInTitle': 'Sign in to BiletFlow',
+    'signInLead': 'Use your BiletFlow account. Event staff sign in here too, to check tickets at the entrance.',
     'email': 'Email',
     'password': 'Password',
     'server': 'Server address',
@@ -89,9 +87,10 @@ const Map<String, Map<String, String>> translations = {
     'error_unknown': 'Something went wrong. Try again.',
   },
   'ru': {
-    'appTitle': 'BiletFlow Check-in',
-    'signInTitle': 'Вход для проверки билетов',
-    'signInLead': 'Используйте аккаунт BiletFlow, который организатор назначил на событие.',
+    ...attendeeTextsRu,
+    'appTitle': 'BiletFlow',
+    'signInTitle': 'Вход в BiletFlow',
+    'signInLead': 'Используйте свой аккаунт BiletFlow. Сотрудники на входе тоже входят здесь, чтобы проверять билеты.',
     'email': 'Email',
     'password': 'Пароль',
     'server': 'Адрес сервера',
@@ -167,9 +166,10 @@ const Map<String, Map<String, String>> translations = {
     'error_unknown': 'Что-то пошло не так. Попробуйте ещё раз.',
   },
   'kk': {
-    'appTitle': 'BiletFlow Check-in',
-    'signInTitle': 'Билет тексеру үшін кіру',
-    'signInLead': 'Ұйымдастырушы іс-шараға тағайындаған BiletFlow аккаунтын пайдаланыңыз.',
+    ...attendeeTextsKk,
+    'appTitle': 'BiletFlow',
+    'signInTitle': 'BiletFlow-ға кіру',
+    'signInLead': 'BiletFlow аккаунтыңызды пайдаланыңыз. Кіреберістегі қызметкерлер де билет тексеру үшін осында кіреді.',
     'email': 'Email',
     'password': 'Құпиясөз',
     'server': 'Сервер мекенжайы',
@@ -246,14 +246,12 @@ const Map<String, Map<String, String>> translations = {
   },
 };
 
-/// Looks up [key] for [language]; falls back to English, then to the key itself.
 String translate(String language, String key, [Map<String, String> values = const {}]) {
   var text = translations[language]?[key] ?? translations['en']![key] ?? key;
   values.forEach((name, value) => text = text.replaceAll('{$name}', value));
   return text;
 }
 
-/// Makes the [Session] available to every widget below it and rebuilds them when it changes.
 class SessionScope extends InheritedNotifier<Session> {
   const SessionScope({super.key, required Session session, required super.child}) : super(notifier: session);
 
@@ -263,10 +261,8 @@ class SessionScope extends InheritedNotifier<Session> {
 extension AppContext on BuildContext {
   Session get session => SessionScope.of(this);
 
-  /// Translated text for the current language: `context.t('signIn')`.
   String t(String key, [Map<String, String> values = const {}]) => translate(session.language, key, values);
 
-  /// Message for a failed API call, translated when the error code is known.
   String errorText(Object error) {
     if (error is! ApiException) return t('error_unknown');
     final key = 'error_${error.code}';

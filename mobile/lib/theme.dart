@@ -1,4 +1,3 @@
-/// Colours and theme shared with the BiletFlow web app ("sky and sun" on deep ink).
 library;
 
 import 'package:material_ui/material_ui.dart';
@@ -6,13 +5,14 @@ import 'package:material_ui/material_ui.dart';
 import 'models.dart';
 
 abstract final class AppColors {
-  static const ink = Color(0xFF12233D);
-  static const inkSoft = Color(0xFF5B6B82);
-  static const skyDeep = Color(0xFF00728F);
-  static const skyPale = Color(0xFFD9F1F6);
-  static const sun = Color(0xFFFFC233);
-  static const mist = Color(0xFFEEF4F6);
-  static const line = Color(0xFFD5DEE6);
+  static const ink = Color(0xFF15302C); // text: a very dark teal
+  static const inkSoft = Color(0xFF4F625E);
+  static const skyDeep = Color(0xFF20655F); // brand teal: buttons, links, highlights
+  static const skyPale = Color(0xFFDCEDE8);
+  static const sun = Color(0xFFFAC55B); // brand gold
+  static const sunPale = Color(0xFFFFF8B6); // brand pale yellow
+  static const mist = Color(0xFFFFF8B6); // page background
+  static const line = Color(0xFFE3D99C);
   static const ok = Color(0xFF17794D);
   static const warn = Color(0xFF9A5B00);
   static const bad = Color(0xFFB42A25);
@@ -33,6 +33,13 @@ ThemeData buildTheme() {
     colorScheme: scheme,
     scaffoldBackgroundColor: AppColors.mist,
     appBarTheme: const AppBarTheme(backgroundColor: Colors.white, foregroundColor: AppColors.ink, elevation: 0, scrolledUnderElevation: 1),
+    navigationBarTheme: NavigationBarThemeData(
+      backgroundColor: Colors.white,
+      indicatorColor: AppColors.sunPale,
+      iconTheme: WidgetStateProperty.resolveWith(
+        (states) => IconThemeData(color: states.contains(WidgetState.selected) ? AppColors.skyDeep : AppColors.inkSoft),
+      ),
+    ),
     cardTheme: CardThemeData(
       color: Colors.white,
       elevation: 0,
@@ -64,7 +71,6 @@ ThemeData buildTheme() {
   );
 }
 
-/// How a scan outcome is shown: a colour AND an icon, so it is clear without relying on colour alone.
 class OutcomeLook {
   const OutcomeLook(this.color, this.icon);
   final Color color;
