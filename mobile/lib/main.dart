@@ -1,14 +1,10 @@
-/// BiletFlow Check-in: the mobile app Event Admins use to verify tickets at the entrance.
-///
-/// Flow of screens:  sign in  ->  my assigned events  ->  one event (counters)  ->  scan / search / activity
 library;
 
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'l10n.dart';
-import 'screens/events_screen.dart';
-import 'screens/login_screen.dart';
+import 'screens/home_shell.dart';
 import 'session.dart';
 import 'theme.dart';
 
@@ -33,17 +29,13 @@ class CheckInApp extends StatelessWidget {
       child: ListenableBuilder(
         listenable: session,
         builder: (context, _) => MaterialApp(
-          title: 'BiletFlow Check-in',
+          title: 'BiletFlow',
           debugShowCheckedModeBanner: false,
           theme: buildTheme(),
           locale: Locale(session.language),
           supportedLocales: const [Locale('kk'), Locale('ru'), Locale('en')],
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
-          home: !session.ready
-              ? const Scaffold(body: Center(child: CircularProgressIndicator()))
-              : session.isSignedIn
-              ? const EventsScreen()
-              : const LoginScreen(),
+          home: !session.ready ? const Scaffold(body: Center(child: CircularProgressIndicator())) : const HomeShell(),
         ),
       ),
     );

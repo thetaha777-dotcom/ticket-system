@@ -1,4 +1,4 @@
-/// HTTP client for the BiletFlow API. Only the calls the check-in app needs.
+/// HTTP client for the BiletFlow API: the calls the attendee screens and the check-in screens need.
 library;
 
 import 'dart:async';
@@ -7,10 +7,9 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
+import 'attendee_models.dart';
 import 'models.dart';
 
-/// A failed API call. [code] is the machine-readable code from the server
-/// ("invalid_credentials", "not_event_staff", ...) or "network_error".
 class ApiException implements Exception {
   const ApiException(this.status, this.code, this.detail);
 
@@ -37,7 +36,6 @@ class ApiClient {
   String? token;
   final http.Client _http;
 
-  /// QR validation should normally finish within two seconds; give a weak venue network a little longer.
   static const _timeout = Duration(seconds: 10);
 
   static String normalizeBaseUrl(String value) {
@@ -80,14 +78,12 @@ class ApiClient {
       code = (json['code'] as String?) ?? code;
       if (json['detail'] is String) detail = json['detail'] as String;
     } on Object {
-      // not JSON: keep the generic message
     }
     throw ApiException(response.statusCode, code, detail);
   }
 
-  // --- account -----------------------------------------------------------------
+  //  account 
 
-  /// Signs in and remembers the token for the following calls.
   Future<AppUser> login(String email, String password) async {
     final json = await _send('POST', '/auth/login', body: {'email': email.trim(), 'password': password}) as Map<String, dynamic>;
     token = json['access_token'] as String;
@@ -96,9 +92,41 @@ class ApiClient {
 
   Future<AppUser> me() async => AppUser.fromJson(await _send('GET', '/auth/me') as Map<String, dynamic>);
 
-  // --- check-in ------------------------------------------------------------------
+  Future<void> register({required String name, required String email, required String password, required String language}) => _send(
+    'POST',
+    '/auth/register',
+    body: {'name': name.trim(), 'email': email.trim(), 'password': password, 'role': 'attendee', 'locale': language},
+  );
 
-  /// Only the events this user is assigned to (or organizes).
+  Future<List<EventSummary>> listEvents({String query = ''}) async {
+    final json = await _send('GET', '/events', query: {if (query.trim().isNotEmpty) 'q': query.trim(), 'limit': '50'}) as Map<String, dynamic>;
+    return [for (final item in json['items'] as List<dynamic>) EventSummary.fromJson(item as Map<String, dynamic>)];
+  }
+
+  Future<EventDetail> event(String slug) async => EventDetail.fromJson(await _send('GET', '/events/$slug') as Map<String, dynamic>);
+  Future<Quote> quote(Selection selection) async =>
+      Quote.fromJson(await _send('POST', '/orders/quote', body: selection.toJson()) as Map<String, dynamic>);
+  Future<Order> createOrder(Selection selection, {required String name, required String email, String phone = ''}) async =>
+      Order.fromJson(
+        await _send('POST', '/orders', body: {
+          ...selection.toJson(),
+          'buyer_name': name.trim(),
+          'buyer_email': email.trim(),
+          'buyer_phone': phone.trim().isEmpty ? null : phone.trim(),
+        }) as Map<String, dynamic>,
+      );
+
+  Future<Order> order(String id) async => Order.fromJson(await _send('GET', '/orders/$id') as Map<String, dynamic>);
+  Future<Order> pay(String orderId, {required bool succeed}) async => Order.fromJson(
+    await _send('POST', '/orders/$orderId/pay', body: {'outcome': succeed ? 'success' : 'failure'}) as Map<String, dynamic>,
+  );
+  Future<List<Ticket>> myTickets() async {
+    final list = await _send('GET', '/tickets') as List<dynamic>;
+    return [for (final item in list) Ticket.fromJson(item as Map<String, dynamic>)];
+  }
+
+  // - check-in 
+
   Future<List<StaffEvent>> events() async {
     final list = await _send('GET', '/checkin/events') as List<dynamic>;
     return [for (final item in list) StaffEvent.fromJson(item as Map<String, dynamic>)];
@@ -107,7 +135,6 @@ class ApiClient {
   Future<CheckInStats> stats(String eventId) async =>
       CheckInStats.fromJson(await _send('GET', '/checkin/events/$eventId/stats') as Map<String, dynamic>);
 
-  /// Sends the exact text of a scanned QR code. With [checkIn] the entry is recorded when the ticket is valid.
   Future<ScanResult> scan(String eventId, String qrPayload, {bool checkIn = true}) async => ScanResult.fromJson(
     await _send('POST', '/checkin/events/$eventId/scan', body: {'qr_payload': qrPayload, 'check_in': checkIn})
         as Map<String, dynamic>,
