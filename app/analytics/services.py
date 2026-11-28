@@ -54,9 +54,10 @@ def event_analytics(db: Session, event: Event, *, date_from: datetime | None = N
             refunds += line_gross - item.discount
         day = by_day[to_zone(order.paid_at, event.timezone).date()]
         day["orders"].add(order.id)
-        day["tickets"] += item.quantity
-        day["revenue"] += line_gross - item.discount
-        type_revenue[item.ticket_category_id] += line_gross - item.discount
+        if order.status == OrderStatus.COMPLETED:
+            day["tickets"] += item.quantity
+            day["revenue"] += line_gross - item.discount
+            type_revenue[item.ticket_category_id] += line_gross - item.discount
         if order.promo_campaign_id:
             totals = campaign_totals[order.promo_campaign_id]
             totals["orders"].add(order.id)

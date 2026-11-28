@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     app_name: str = "BiletFlow"
     environment: str = "development" 
 
-    DATABASE_URL: str = "postgresql+psycopg2://biletflow:biletflow@localhost:5432/biletflow"
+    DATABASE_URL: str = "postgresql+psycopg2://biletflow:biletflow@localhost:5432/biletflow_test"
 
     SECRET_KEY: str = DEFAULT_SECRET
     algorithm: str = "HS256"

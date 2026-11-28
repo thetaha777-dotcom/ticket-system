@@ -1,5 +1,9 @@
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
+
+# These must be set before anything from `app` is imported.
 os.environ["DATABASE_URL"] = os.getenv("TEST_DATABASE_URL", "sqlite://")
 os.environ["ENVIRONMENT"] = "test"
 os.environ["EMAIL_BACKEND"] = "memory"
@@ -8,6 +12,7 @@ os.environ["MEDIA_DIR"] = "/tmp/biletflow-test-media"
 
 import pytest  # noqa: E402
 from fastapi.testclient import TestClient  # noqa: E402
+
 
 import app.models  # noqa: E402, F401
 from app.core.database import Base, engine  # noqa: E402
