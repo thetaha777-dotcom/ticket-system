@@ -2,10 +2,11 @@ import 'package:material_ui/material_ui.dart';
 
 import '../l10n.dart';
 import '../theme.dart';
+import '../widgets/brand_logo.dart';
+import '../widgets/common.dart';
 import '../widgets/language_button.dart';
+import 'register_screen.dart';
 
-/// Sign-in form. The server address can be changed here, which is handy for a demo
-/// where the API runs on a laptop in the same Wi-Fi network.
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -48,12 +49,20 @@ class _LoginScreenState extends State<LoginScreen> {
     final session = context.session;
     try {
       await session.signIn(_email.text, _password.text, serverUrl: _server.text);
-      // On success the app switches to the events screen by itself (see main.dart).
+      if (mounted) Navigator.of(context).pop(true);
     } on Object catch (error) {
       if (mounted) setState(() => _problem = context.errorText(error));
     } finally {
       if (mounted) setState(() => _busy = false);
     }
+  }
+
+  Future<void> _openRegister() async {
+    final session = context.session;
+    await session.setServerUrl(_server.text);
+    if (!mounted) return;
+    final created = await Navigator.of(context).push<bool>(MaterialPageRoute(builder: (_) => const RegisterScreen()));
+    if ((created ?? false) && mounted) Navigator.of(context).pop(true);
   }
 
   String? _required(String? value) => (value == null || value.trim().isEmpty) ? context.t('required') : null;
@@ -71,6 +80,8 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  const Align(alignment: Alignment.centerLeft, child: BrandLogo(height: 48)),
+                  const SizedBox(height: 20),
                   Text(context.t('signInTitle'), style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w700, color: AppColors.ink)),
                   const SizedBox(height: 8),
                   Text(context.t('signInLead'), style: const TextStyle(fontSize: 16, color: AppColors.inkSoft)),
@@ -111,9 +122,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   FilledButton(
                     onPressed: _busy ? null : _submit,
                     child: _busy
-                        ? const SizedBox(height: 22, width: 22, child: CircularProgressIndicator(strokeWidth: 2.5, color: Colors.white))
+                        ? buttonSpinner
                         : Text(context.t('signIn')),
                   ),
+                  const Divider(height: 32),
+                  Text(context.t('createAccountLead'), textAlign: TextAlign.center, style: const TextStyle(color: AppColors.inkSoft, fontSize: 15)),
+                  const SizedBox(height: 10),
+                  OutlinedButton(onPressed: _busy ? null : _openRegister, child: Text(context.t('noAccount'))),
                 ],
               ),
             ),
