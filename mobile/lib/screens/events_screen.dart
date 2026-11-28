@@ -7,7 +7,6 @@ import '../theme.dart';
 import '../widgets/language_button.dart';
 import 'event_screen.dart';
 
-/// The events the signed-in Event Admin is assigned to. Nothing else is visible.
 class EventsScreen extends StatefulWidget {
   const EventsScreen({super.key});
 
@@ -49,7 +48,7 @@ class _EventsScreenState extends State<EventsScreen> {
     final session = context.session;
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.t('myEvents')),
+        title: Text(context.t('tabCheckIn')),
         actions: [
           const LanguageButton(),
           IconButton(tooltip: context.t('signOut'), icon: const Icon(Icons.logout), onPressed: session.signOut),
